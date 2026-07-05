@@ -5,6 +5,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Arman Mohapatra — Portfolio</title>
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AC%3C/text%3E%3C/svg%3E">
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
@@ -59,6 +61,47 @@
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans: 'Inter', system-ui, sans-serif;
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+      /* Motion-picture accents — klieg-light gold against the purple grade */
+      --gold: #e8ab2d;
+      --gold-soft: rgba(232, 171, 45, 0.16);
+
+      /* Theme-reactive overlay colors (swapped in dark mode below) */
+      --dot-color: rgba(139, 92, 246, 0.22);
+      --ambient-1: rgba(168, 85, 247, 0.07);
+      --ambient-2: rgba(109, 40, 217, 0.05);
+      --nav-bg: rgba(245, 243, 255, 0.92);
+      --mob-bg: rgba(245, 243, 255, 0.98);
+      --grain-blend: overlay;
+      --grain-opacity: 0.05;
+    }
+
+    /* ── DARK MODE — same cinematic identity, night-screening grade ── */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #07050d;
+        --bg2: #0d0918;
+        --surface: #140f22;
+        --surface2: rgba(139, 92, 246, 0.07);
+
+        --text: #f2eeff;
+        --text-soft: #cabfe8;
+        --text-muted: #8577a8;
+
+        --border: rgba(196, 181, 253, 0.16);
+        --border-mid: rgba(196, 181, 253, 0.3);
+        --shadow-sm: 0 2px 14px rgba(0, 0, 0, 0.45);
+        --shadow-md: 0 10px 36px rgba(0, 0, 0, 0.55);
+        --shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.65);
+
+        --dot-color: rgba(196, 181, 253, 0.16);
+        --ambient-1: rgba(168, 85, 247, 0.16);
+        --ambient-2: rgba(232, 171, 45, 0.07);
+        --nav-bg: rgba(7, 5, 13, 0.82);
+        --mob-bg: rgba(7, 5, 13, 0.96);
+        --grain-blend: soft-light;
+        --grain-opacity: 0.09;
+      }
     }
 
     body {
@@ -76,7 +119,7 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background-image: radial-gradient(circle, rgba(139, 92, 246, 0.22) 1px, transparent 1px);
+      background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
       background-size: 28px 28px;
     }
 
@@ -96,7 +139,7 @@
       left: 15%;
       width: 70vw;
       height: 65vh;
-      background: radial-gradient(ellipse, rgba(168, 85, 247, 0.07) 0%, transparent 68%);
+      background: radial-gradient(ellipse, var(--ambient-1) 0%, transparent 68%);
       animation: bloom 9s ease-in-out infinite;
     }
 
@@ -107,7 +150,7 @@
       right: 5%;
       width: 55vw;
       height: 55vh;
-      background: radial-gradient(ellipse, rgba(109, 40, 217, 0.05) 0%, transparent 68%);
+      background: radial-gradient(ellipse, var(--ambient-2) 0%, transparent 68%);
       animation: bloom 11s ease-in-out infinite reverse;
     }
 
@@ -120,6 +163,128 @@
 
       50% {
         transform: scale(1.07) translateY(-18px)
+      }
+    }
+
+    /* ════════════════════════════
+   MOTION-PICTURE BACKGROUND LAYER
+   Searchlight sweep + sprocket rails + film grain
+════════════════════════════ */
+    .cine-sweep {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .cine-sweep::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150vmax;
+      height: 150vmax;
+      margin: -75vmax 0 0 -75vmax;
+      background: conic-gradient(from 0deg,
+          transparent 0deg,
+          var(--gold-soft) 6deg,
+          transparent 16deg,
+          transparent 180deg,
+          rgba(139, 92, 246, 0.14) 188deg,
+          transparent 200deg,
+          transparent 360deg);
+      animation: cineSweepSpin 34s linear infinite;
+      mix-blend-mode: var(--grain-blend);
+    }
+
+    @keyframes cineSweepSpin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .film-rail {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 11px;
+      z-index: 501;
+      pointer-events: none;
+      opacity: 0.4;
+      background-image: radial-gradient(circle, transparent 38%, var(--text-muted) 39%);
+      background-size: 100% 26px;
+      background-repeat: repeat-y;
+      animation: reelScroll 5s linear infinite;
+    }
+
+    .film-rail.left {
+      left: 0
+    }
+
+    .film-rail.right {
+      right: 0
+    }
+
+    @keyframes reelScroll {
+      to {
+        background-position: 0 26px
+      }
+    }
+
+    /* Persistent film-grain wash over the whole viewport, splash included */
+    .grain {
+      position: fixed;
+      inset: -10%;
+      z-index: 9500;
+      pointer-events: none;
+      opacity: var(--grain-opacity);
+      mix-blend-mode: var(--grain-blend);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      animation: grainShift 1s steps(6) infinite;
+    }
+
+    @keyframes grainShift {
+
+      0%,
+      100% {
+        transform: translate(0, 0)
+      }
+
+      20% {
+        transform: translate(-2%, -6%)
+      }
+
+      40% {
+        transform: translate(-8%, 3%)
+      }
+
+      60% {
+        transform: translate(6%, -3%)
+      }
+
+      80% {
+        transform: translate(-4%, 6%)
+      }
+    }
+
+    @media(max-width:640px) {
+      .film-rail {
+        width: 6px
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .grain,
+      .cine-sweep::before,
+      .film-rail,
+      .ambient::before,
+      .ambient::after,
+      .particle,
+      .nav-avatar::before,
+      .reel-ring {
+        animation: none !important
       }
     }
 
@@ -159,6 +324,46 @@
       text-align: center;
       padding: 2rem;
       max-width: 860px
+    }
+
+    /* Film-reel countdown leader — spins slowly behind the splash text */
+    .reel-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(72vmin, 640px);
+      height: min(72vmin, 640px);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px dashed var(--border-mid);
+      opacity: 0.4;
+      z-index: 1;
+      pointer-events: none;
+      animation: reelSpin 46s linear infinite;
+    }
+
+    .reel-ring::before {
+      content: '';
+      position: absolute;
+      inset: 13%;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+    }
+
+    .reel-ring::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: calc(50% - 1px);
+      width: 2px;
+      height: 16px;
+      background: var(--gold);
+    }
+
+    @keyframes reelSpin {
+      to {
+        transform: translate(-50%, -50%) rotate(360deg)
+      }
     }
 
     .splash-badge {
@@ -304,7 +509,7 @@
     }
 
     #nav.scrolled {
-      background: rgba(245, 243, 255, 0.92);
+      background: var(--nav-bg);
       backdrop-filter: blur(22px);
       border-bottom-color: var(--border);
     }
@@ -328,6 +533,7 @@
     }
 
     .nav-avatar {
+      position: relative;
       width: 38px;
       height: 38px;
       border-radius: 50%;
@@ -340,6 +546,24 @@
       font-size: 0.95rem;
       flex-shrink: 0;
       box-shadow: 0 0 0 2px rgba(196, 181, 253, 0.2);
+    }
+
+    /* Slow-spinning aperture ring — camera-iris nod behind the avatar */
+    .nav-avatar::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(var(--gold), var(--p400), var(--gold));
+      opacity: 0.55;
+      z-index: -1;
+      animation: apertureSpin 7s linear infinite;
+    }
+
+    @keyframes apertureSpin {
+      to {
+        transform: rotate(360deg)
+      }
     }
 
     .nav-name {
@@ -386,7 +610,7 @@
     .mob-menu {
       display: none;
       flex-direction: column;
-      background: rgba(245, 243, 255, 0.98);
+      background: var(--mob-bg);
       border-top: 1px solid var(--border);
       padding: 1rem 2.5rem 1.5rem;
       gap: 0.15rem;
@@ -693,6 +917,31 @@
       bottom: -10px;
       border: 1px solid rgba(196, 181, 253, 0.18);
       z-index: -1;
+    }
+
+    /* Camera-viewfinder focus brackets — cinematography nod on hover */
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0;
+      background:
+        linear-gradient(var(--gold), var(--gold)) top left / 18px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) top left / 2px 18px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) top right / 18px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) top right / 2px 18px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom left / 18px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom left / 2px 18px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom right / 18px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom right / 2px 18px no-repeat;
+      transition: opacity 0.35s var(--ease), inset 0.35s var(--ease);
+    }
+
+    .photo-frame:hover::before {
+      opacity: 0.95;
+      inset: 8px;
     }
 
     /* Placeholder variant */
@@ -1101,6 +1350,31 @@
       box-shadow: var(--shadow-md)
     }
 
+    /* Camera-viewfinder focus brackets — matches the photo frame's hover cue */
+    .gal-item::before {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0;
+      background:
+        linear-gradient(var(--gold), var(--gold)) top left / 14px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) top left / 2px 14px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) top right / 14px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) top right / 2px 14px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom left / 14px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom left / 2px 14px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom right / 14px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom right / 2px 14px no-repeat;
+      transition: opacity 0.3s var(--ease), inset 0.3s var(--ease);
+    }
+
+    .gal-item:hover::before {
+      opacity: 0.95;
+      inset: 6px;
+    }
+
     .gal-item img {
       width: 100%;
       height: 100%;
@@ -1187,10 +1461,15 @@
 <body>
 
   <div class="ambient"></div>
+  <div class="cine-sweep" aria-hidden="true"></div>
+  <div class="film-rail left" aria-hidden="true"></div>
+  <div class="film-rail right" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <!-- ════ SPLASH ════ -->
   <div id="splash">
     <div id="particles-wrap"></div>
+    <div class="reel-ring" aria-hidden="true"></div>
     <div class="splash-wrap">
       <span class="splash-badge">Portfolio · Arman Mohapatra</span>
       <div class="splash-typed">

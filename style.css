@@ -1,0 +1,107 @@
+/*
+ * Custom CSS for Arman Mohapatra Portfolio
+ */
+:root {
+  --bg-color: #0f172a;
+  --text-color: #ffffff;
+  --card-bg: rgba(30, 41, 59, 0.8);
+  --dot-color: rgba(56, 189, 248, 0.4);
+  --dot-bg-color: #000000;
+  --accent-blue: #38bdf8;
+}
+
+.light {
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --dot-color: rgba(56, 189, 248, 0.2);
+  --dot-bg-color: #f8fafc;
+}
+
+body {
+  background-color: var(--dot-bg-color);
+  color: var(--text-color);
+  background-image: radial-gradient(var(--dot-color) 0.6px, transparent 0.6px);
+  background-size: 25px 25px;
+  perspective: 1000px;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  min-height: 100vh; /* Ensures background covers full screen */
+}
+
+/* 1. VISIBILITY FIX */
+/* This ensures content is hidden initially but visible when the 'visible' class is added */
+.animated-content {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* IMPORTANT: Your JavaScript must add this class to make elements appear */
+.animated-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 2. CARD & GALLERY STYLES */
+.bg-card-bg {
+  background-color: var(--card-bg);
+}
+
+.activity-card-glow {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05); 
+  transition: all 0.5s ease-out;
+  z-index: 10;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.activity-card-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.8rem;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.3) 0%, rgba(192, 132, 252, 0) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.activity-card-glow:hover::before {
+  background: linear-gradient(135deg, var(--accent-blue) 0%, rgba(192, 132, 252, 0.6) 100%);
+}
+
+/* 3. GALLERY IMAGE STYLES */
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Fixed the circular placeholder logic */
+.circular-placeholder {
+  width: 250px; /* Kept equal for a circle */
+  height: 250px; 
+  border-radius: 50%;
+  background-color: #334155;
+  border: 2px solid var(--accent-blue);
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+/* 4. UTILITIES */
+.focus-ring:focus-visible { 
+  outline: 3px solid var(--accent-blue); 
+  outline-offset: 2px; 
+}
+
+* {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}

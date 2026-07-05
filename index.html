@@ -69,8 +69,8 @@
 
       /* Theme-reactive overlay colors (swapped in dark mode below) */
       --dot-color: rgba(251, 86, 7, 0.22);
-      --ambient-1: rgba(255, 145, 66, 0.09);
-      --ambient-2: rgba(184, 24, 24, 0.06);
+      --ambient-1: rgba(255, 145, 66, 0.16);
+      --ambient-2: rgba(184, 24, 24, 0.12);
       --nav-bg: rgba(251, 241, 228, 0.92);
       --mob-bg: rgba(251, 241, 228, 0.98);
       --grain-blend: overlay;
@@ -96,8 +96,8 @@
         --shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.65);
 
         --dot-color: rgba(255, 204, 77, 0.18);
-        --ambient-1: rgba(255, 145, 66, 0.18);
-        --ambient-2: rgba(232, 171, 45, 0.08);
+        --ambient-1: rgba(255, 145, 66, 0.26);
+        --ambient-2: rgba(232, 171, 45, 0.14);
         --nav-bg: rgba(13, 8, 6, 0.82);
         --mob-bg: rgba(13, 8, 6, 0.96);
         --grain-blend: soft-light;
@@ -141,7 +141,7 @@
       width: 70vw;
       height: 65vh;
       background: radial-gradient(ellipse, var(--ambient-1) 0%, transparent 68%);
-      animation: bloom 9s ease-in-out infinite;
+      animation: bloomA 14s ease-in-out infinite;
     }
 
     .ambient::after {
@@ -152,24 +152,44 @@
       width: 55vw;
       height: 55vh;
       background: radial-gradient(ellipse, var(--ambient-2) 0%, transparent 68%);
-      animation: bloom 11s ease-in-out infinite reverse;
+      animation: bloomB 17s ease-in-out infinite;
     }
 
-    @keyframes bloom {
+    @keyframes bloomA {
 
       0%,
       100% {
-        transform: scale(1) translateY(0)
+        transform: scale(1) translate(0, 0)
       }
 
-      50% {
-        transform: scale(1.07) translateY(-18px)
+      33% {
+        transform: scale(1.18) translate(60px, -40px)
+      }
+
+      66% {
+        transform: scale(0.95) translate(-40px, 30px)
+      }
+    }
+
+    @keyframes bloomB {
+
+      0%,
+      100% {
+        transform: scale(1) translate(0, 0)
+      }
+
+      33% {
+        transform: scale(0.92) translate(-70px, 35px)
+      }
+
+      66% {
+        transform: scale(1.16) translate(45px, -50px)
       }
     }
 
     /* ════════════════════════════
    MOTION-PICTURE BACKGROUND LAYER
-   Searchlight sweep + sprocket rails + film grain
+   Searchlight sweep + sprocket rails + film grain + embers
 ════════════════════════════ */
     .cine-sweep {
       position: fixed;
@@ -179,7 +199,8 @@
       overflow: hidden;
     }
 
-    .cine-sweep::before {
+    .cine-sweep::before,
+    .cine-sweep::after {
       content: '';
       position: absolute;
       top: 50%;
@@ -187,21 +208,75 @@
       width: 150vmax;
       height: 150vmax;
       margin: -75vmax 0 0 -75vmax;
+      mix-blend-mode: var(--grain-blend);
+    }
+
+    .cine-sweep::before {
       background: conic-gradient(from 0deg,
           transparent 0deg,
-          var(--gold-soft) 6deg,
-          transparent 16deg,
+          var(--gold-soft) 10deg,
+          transparent 26deg,
           transparent 180deg,
-          rgba(251, 86, 7, 0.14) 188deg,
-          transparent 200deg,
+          rgba(251, 86, 7, 0.24) 188deg,
+          transparent 210deg,
           transparent 360deg);
-      animation: cineSweepSpin 34s linear infinite;
-      mix-blend-mode: var(--grain-blend);
+      animation: cineSweepSpin 20s linear infinite;
+    }
+
+    .cine-sweep::after {
+      background: conic-gradient(from 180deg,
+          transparent 0deg,
+          rgba(255, 204, 77, 0.18) 8deg,
+          transparent 22deg,
+          transparent 360deg);
+      animation: cineSweepSpin 27s linear infinite reverse;
     }
 
     @keyframes cineSweepSpin {
       to {
         transform: rotate(360deg)
+      }
+    }
+
+    /* Rising embers — drift the full height of the page, in front of the content */
+    .embers {
+      position: fixed;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ember {
+      position: absolute;
+      bottom: -5%;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 8px 2px currentColor;
+      animation: emberRise linear infinite;
+    }
+
+    @keyframes emberRise {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.85;
+      }
+
+      50% {
+        transform: translate(var(--drift, 20px), -55vh) scale(0.85);
+      }
+
+      90% {
+        opacity: 0.4;
+      }
+
+      100% {
+        transform: translate(calc(var(--drift, 20px) * 2), -112vh) scale(0.4);
+        opacity: 0;
       }
     }
 
@@ -299,14 +374,20 @@
 
       .grain,
       .cine-sweep::before,
+      .cine-sweep::after,
       .film-rail,
       .ambient::before,
       .ambient::after,
       .particle,
+      .ember,
       .nav-avatar::before,
       .reel-ring,
       #nav::after {
         animation: none !important
+      }
+
+      .embers {
+        display: none
       }
     }
 
@@ -1547,6 +1628,7 @@
   <div class="film-rail right" aria-hidden="true"></div>
   <div class="film-edge top" aria-hidden="true"></div>
   <div class="film-edge bottom" aria-hidden="true"></div>
+  <div class="embers" id="embers" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
   <!-- ════ SPLASH ════ -->
@@ -1938,7 +2020,7 @@
     }
     setTimeout(type, 500);
 
-    /* ── PARTICLES ── */
+    /* ── PARTICLES (splash only) ── */
     const pw = document.getElementById('particles-wrap');
     for (let i = 0; i < 20; i++) {
       const p = document.createElement('div');
@@ -1947,6 +2029,25 @@
       p.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random() * 100}%;
     animation-delay:${Math.random() * 9}s;animation-duration:${Math.random() * 5 + 7}s;opacity:0.22;`;
       pw.appendChild(p);
+    }
+
+    /* ── EMBERS (whole site, keeps drifting after the splash fades) ── */
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+      const embersWrap = document.getElementById('embers');
+      const emberHues = ['#ffcc4d', '#fb5607', '#ff9a52'];
+      for (let i = 0; i < 30; i++) {
+        const e = document.createElement('div');
+        e.className = 'ember';
+        const sz = Math.random() * 4 + 2;
+        const drift = (Math.random() * 90 - 45).toFixed(0) + 'px';
+        e.style.cssText = `left:${Math.random() * 100}%;width:${sz}px;height:${sz}px;
+      color:${emberHues[i % emberHues.length]};
+      animation-duration:${(Math.random() * 8 + 9).toFixed(1)}s;
+      animation-delay:${(Math.random() * 14).toFixed(2)}s;
+      --drift:${drift};`;
+        embersWrap.appendChild(e);
+      }
     }
 
     /* ── ENTER ── */

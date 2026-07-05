@@ -280,6 +280,52 @@
       }
     }
 
+    /* Floating hobby icons — camera, reel, code, chess, pen: drifting nods to what I actually do */
+    .hobby-icons {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hobby-icon {
+      position: absolute;
+      bottom: -12%;
+      opacity: 0;
+      animation: hobbyFloat linear infinite;
+    }
+
+    .hobby-icon svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    @keyframes hobbyFloat {
+      0% {
+        transform: translateY(0) translateX(0) rotate(var(--rot0, -6deg));
+        opacity: 0;
+      }
+
+      10% {
+        opacity: var(--icon-op, 0.2);
+      }
+
+      50% {
+        transform: translateY(-58vh) translateX(var(--drift, 20px)) rotate(var(--rot1, 6deg));
+      }
+
+      90% {
+        opacity: var(--icon-op, 0.2);
+      }
+
+      100% {
+        transform: translateY(-115vh) translateX(calc(var(--drift, 20px) * 2)) rotate(var(--rot2, -4deg));
+        opacity: 0;
+      }
+    }
+
     .film-rail {
       position: fixed;
       top: 0;
@@ -380,13 +426,15 @@
       .ambient::after,
       .particle,
       .ember,
+      .hobby-icon,
       .nav-avatar::before,
       .reel-ring,
       #nav::after {
         animation: none !important
       }
 
-      .embers {
+      .embers,
+      .hobby-icons {
         display: none
       }
     }
@@ -1628,6 +1676,7 @@
   <div class="film-rail right" aria-hidden="true"></div>
   <div class="film-edge top" aria-hidden="true"></div>
   <div class="film-edge bottom" aria-hidden="true"></div>
+  <div class="hobby-icons" id="hobbyIcons" aria-hidden="true"></div>
   <div class="embers" id="embers" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
@@ -2047,6 +2096,46 @@
       animation-delay:${(Math.random() * 14).toFixed(2)}s;
       --drift:${drift};`;
         embersWrap.appendChild(e);
+      }
+    }
+
+    /* ── HOBBY ICONS (film camera, reel, code, chess, pen — drifting nods to the About/Activities content) ── */
+    if (!reduceMotion) {
+      const hobbyWrap = document.getElementById('hobbyIcons');
+      // Same glyphs used on the Activities cards below, so the background echoes the real content
+      const hobbyGlyphs = [
+        '<path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.36a1 1 0 0 1-1.447.89L15 14"/><rect x="1" y="6" width="15" height="12" rx="2"/>', // camera
+        '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.2"/><circle cx="12" cy="5.5" r="1.4"/><circle cx="12" cy="18.5" r="1.4"/><circle cx="5.5" cy="12" r="1.4"/><circle cx="18.5" cy="12" r="1.4"/>', // film reel
+        '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>', // code
+        '<rect x="2" y="2" width="20" height="20" rx="1"/><path d="M2 9h20M2 15h20M9 2v20M15 2v20"/>', // chess
+        '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>', // pen
+      ];
+      // Weighted so filmmaking (camera + reel) shows up most often
+      const glyphIndex = () => {
+        const r = Math.random();
+        if (r < 0.3) return 0;
+        if (r < 0.55) return 1;
+        if (r < 0.7) return 2;
+        if (r < 0.85) return 3;
+        return 4;
+      };
+      const hobbyHues = ['var(--gold)', 'var(--p500)', 'var(--p400)'];
+      for (let i = 0; i < 11; i++) {
+        const wrap = document.createElement('div');
+        wrap.className = 'hobby-icon';
+        const sz = Math.random() * 18 + 26;
+        const drift = (Math.random() * 70 - 35).toFixed(0) + 'px';
+        const rot0 = (Math.random() * 16 - 8).toFixed(1) + 'deg';
+        const rot1 = (Math.random() * 16 - 8).toFixed(1) + 'deg';
+        const rot2 = (Math.random() * 16 - 8).toFixed(1) + 'deg';
+        wrap.style.cssText = `left:${(Math.random() * 96).toFixed(1)}%;width:${sz}px;height:${sz}px;
+      color:${hobbyHues[i % hobbyHues.length]};
+      animation-duration:${(Math.random() * 14 + 24).toFixed(1)}s;
+      animation-delay:${(Math.random() * 26).toFixed(2)}s;
+      --icon-op:${(Math.random() * 0.14 + 0.12).toFixed(2)};
+      --drift:${drift};--rot0:${rot0};--rot1:${rot1};--rot2:${rot2};`;
+        wrap.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">${hobbyGlyphs[glyphIndex()]}</svg>`;
+        hobbyWrap.appendChild(wrap);
       }
     }
 

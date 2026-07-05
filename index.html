@@ -8,7 +8,7 @@
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AC%3C/text%3E%3C/svg%3E">
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap"
     rel="stylesheet">
   <style>
     *,
@@ -23,86 +23,61 @@
       scroll-behavior: smooth
     }
 
-    /* ── DESIGN TOKENS ── */
+    /* ── DESIGN TOKENS — Dala system: black void, one violet accent, amber sparks ── */
     :root {
-      /* Warm marquee-lobby base */
-      --bg: #fbf1e4;
-      --bg2: #f6e3c9;
-      --surface: #fffaf2;
-      --surface2: rgba(251, 86, 7, 0.045);
+      /* Void canvas — pure black is the surface, not dark gray */
+      --bg: #000000;
+      --bg2: #050505;
+      --surface: transparent;
+      --surface2: rgba(128, 82, 255, 0.05);
 
-      /* Flame palette */
-      --p50: #fff4e0;
-      --p100: #ffe3b3;
-      --p200: #ffc978;
-      --p300: #ffab5e;
-      --p400: #ff7b3d;
-      --p500: #fb5607;
-      --p600: #d1360b;
-      --p700: #a4160a;
+      /* Electric Iris violet — tinted only for hover/active states */
+      --p50: #efeaff;
+      --p100: #d9ccff;
+      --p200: #b9a6ff;
+      --p300: #a084ff;
+      --p400: #8c68ff;
+      --p500: #8052ff;
+      --p600: #6a3ef0;
+      --p700: #5730c9;
 
-      /* Gradient */
-      --grad: linear-gradient(135deg, #ffd166, #fb5607 55%, #c1121f);
-      --grad-soft: linear-gradient(135deg, rgba(255, 145, 66, 0.10), rgba(184, 24, 24, 0.05));
+      /* Gradient — reserved for the logo mark only, per brand system */
+      --grad: linear-gradient(135deg, #8052ff, #15846e);
+      --grad-soft: linear-gradient(135deg, rgba(128, 82, 255, 0.12), rgba(21, 132, 110, 0.08));
 
-      /* Text — dark on light */
-      --text: #240f04;
-      --text-soft: #5c3418;
-      --text-muted: #967157;
+      /* Text — bone white / silver mist / ash gray */
+      --text: #ffffff;
+      --text-soft: #bdbdbd;
+      --text-muted: #9a9a9a;
 
-      /* Borders / shadows */
-      --border: rgba(251, 86, 7, 0.16);
-      --border-mid: rgba(251, 86, 7, 0.28);
-      --shadow-sm: 0 2px 12px rgba(120, 30, 0, 0.12);
-      --shadow-md: 0 8px 32px rgba(120, 30, 0, 0.16);
-      --shadow-lg: 0 20px 60px rgba(120, 30, 0, 0.2);
+      /* Borders / shadows — Dala uses almost none; kept faint only where a dense grid needs it */
+      --border: rgba(255, 255, 255, 0.1);
+      --border-mid: rgba(255, 255, 255, 0.18);
+      --shadow-sm: none;
+      --shadow-md: none;
+      --shadow-lg: none;
 
-      /* Type */
-      --display: 'Bebas Neue', 'Cormorant Garamond', Georgia, serif;
-      --serif: 'Cormorant Garamond', Georgia, serif;
+      /* Type — single typeface, Inter substituting for PPNeueMontreal */
+      --display: 'Inter', system-ui, sans-serif;
+      --serif: 'Inter', system-ui, sans-serif;
       --sans: 'Inter', system-ui, sans-serif;
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
-      /* Motion-picture accents — klieg-light gold against the flame grade */
-      --gold: #e8ab2d;
-      --gold-soft: rgba(232, 171, 45, 0.16);
+      /* Saffron Spark amber — highlight emphasis, labels, attention punctuation */
+      --gold: #ffb829;
+      --gold-soft: rgba(255, 184, 41, 0.16);
 
-      /* Theme-reactive overlay colors (swapped in dark mode below) */
-      --dot-color: rgba(251, 86, 7, 0.22);
-      --ambient-1: rgba(255, 145, 66, 0.09);
-      --ambient-2: rgba(184, 24, 24, 0.06);
-      --nav-bg: rgba(251, 241, 228, 0.92);
-      --mob-bg: rgba(251, 241, 228, 0.98);
-      --grain-blend: overlay;
-      --grain-opacity: 0.05;
-    }
+      /* Deep Verdant teal — secondary tint, gradient stop */
+      --teal: #15846e;
 
-    /* ── DARK MODE — same cinematic identity, night-screening grade ── */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0d0806;
-        --bg2: #170e09;
-        --surface: #1d130c;
-        --surface2: rgba(251, 86, 7, 0.08);
-
-        --text: #fff2e2;
-        --text-soft: #e8c6a8;
-        --text-muted: #a6816a;
-
-        --border: rgba(255, 204, 77, 0.16);
-        --border-mid: rgba(255, 204, 77, 0.3);
-        --shadow-sm: 0 2px 14px rgba(0, 0, 0, 0.45);
-        --shadow-md: 0 10px 36px rgba(0, 0, 0, 0.55);
-        --shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.65);
-
-        --dot-color: rgba(255, 204, 77, 0.18);
-        --ambient-1: rgba(255, 145, 66, 0.18);
-        --ambient-2: rgba(232, 171, 45, 0.08);
-        --nav-bg: rgba(13, 8, 6, 0.82);
-        --mob-bg: rgba(13, 8, 6, 0.96);
-        --grain-blend: soft-light;
-        --grain-opacity: 0.1;
-      }
+      /* Ambient overlay colors for the background motion layer */
+      --dot-color: rgba(128, 82, 255, 0.2);
+      --ambient-1: rgba(128, 82, 255, 0.22);
+      --ambient-2: rgba(21, 132, 110, 0.16);
+      --nav-bg: rgba(0, 0, 0, 0.82);
+      --mob-bg: rgba(0, 0, 0, 0.96);
+      --grain-blend: soft-light;
+      --grain-opacity: 0.08;
     }
 
     body {
@@ -111,6 +86,7 @@
       color: var(--text);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01" 1;
     }
 
     /* Dot pattern — soft purple dots on light background */
@@ -141,7 +117,7 @@
       width: 70vw;
       height: 65vh;
       background: radial-gradient(ellipse, var(--ambient-1) 0%, transparent 68%);
-      animation: bloom 9s ease-in-out infinite;
+      animation: bloomA 14s ease-in-out infinite;
     }
 
     .ambient::after {
@@ -152,24 +128,44 @@
       width: 55vw;
       height: 55vh;
       background: radial-gradient(ellipse, var(--ambient-2) 0%, transparent 68%);
-      animation: bloom 11s ease-in-out infinite reverse;
+      animation: bloomB 17s ease-in-out infinite;
     }
 
-    @keyframes bloom {
+    @keyframes bloomA {
 
       0%,
       100% {
-        transform: scale(1) translateY(0)
+        transform: scale(1) translate(0, 0)
       }
 
-      50% {
-        transform: scale(1.07) translateY(-18px)
+      33% {
+        transform: scale(1.18) translate(60px, -40px)
+      }
+
+      66% {
+        transform: scale(0.95) translate(-40px, 30px)
+      }
+    }
+
+    @keyframes bloomB {
+
+      0%,
+      100% {
+        transform: scale(1) translate(0, 0)
+      }
+
+      33% {
+        transform: scale(0.92) translate(-70px, 35px)
+      }
+
+      66% {
+        transform: scale(1.16) translate(45px, -50px)
       }
     }
 
     /* ════════════════════════════
    MOTION-PICTURE BACKGROUND LAYER
-   Searchlight sweep + sprocket rails + film grain
+   Searchlight sweep + sprocket rails + film grain + embers
 ════════════════════════════ */
     .cine-sweep {
       position: fixed;
@@ -179,7 +175,8 @@
       overflow: hidden;
     }
 
-    .cine-sweep::before {
+    .cine-sweep::before,
+    .cine-sweep::after {
       content: '';
       position: absolute;
       top: 50%;
@@ -187,21 +184,121 @@
       width: 150vmax;
       height: 150vmax;
       margin: -75vmax 0 0 -75vmax;
+      mix-blend-mode: var(--grain-blend);
+    }
+
+    .cine-sweep::before {
       background: conic-gradient(from 0deg,
           transparent 0deg,
-          var(--gold-soft) 6deg,
-          transparent 16deg,
+          var(--gold-soft) 10deg,
+          transparent 26deg,
           transparent 180deg,
-          rgba(251, 86, 7, 0.14) 188deg,
-          transparent 200deg,
+          rgba(128, 82, 255, 0.24) 188deg,
+          transparent 210deg,
           transparent 360deg);
-      animation: cineSweepSpin 34s linear infinite;
-      mix-blend-mode: var(--grain-blend);
+      animation: cineSweepSpin 20s linear infinite;
+    }
+
+    .cine-sweep::after {
+      background: conic-gradient(from 180deg,
+          transparent 0deg,
+          rgba(255, 184, 41, 0.18) 8deg,
+          transparent 22deg,
+          transparent 360deg);
+      animation: cineSweepSpin 27s linear infinite reverse;
     }
 
     @keyframes cineSweepSpin {
       to {
         transform: rotate(360deg)
+      }
+    }
+
+    /* Rising embers — drift the full height of the page, in front of the content */
+    .embers {
+      position: fixed;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ember {
+      position: absolute;
+      bottom: -5%;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 8px 2px currentColor;
+      animation: emberRise linear infinite;
+    }
+
+    @keyframes emberRise {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.85;
+      }
+
+      50% {
+        transform: translate(var(--drift, 20px), -55vh) scale(0.85);
+      }
+
+      90% {
+        opacity: 0.4;
+      }
+
+      100% {
+        transform: translate(calc(var(--drift, 20px) * 2), -112vh) scale(0.4);
+        opacity: 0;
+      }
+    }
+
+    /* Floating hobby icons — camera, reel, code, chess, pen: drifting nods to what I actually do */
+    .hobby-icons {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hobby-icon {
+      position: absolute;
+      bottom: -12%;
+      opacity: 0;
+      animation: hobbyFloat linear infinite;
+    }
+
+    .hobby-icon svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    @keyframes hobbyFloat {
+      0% {
+        transform: translateY(0) translateX(0) rotate(var(--rot0, -6deg));
+        opacity: 0;
+      }
+
+      10% {
+        opacity: var(--icon-op, 0.2);
+      }
+
+      50% {
+        transform: translateY(-58vh) translateX(var(--drift, 20px)) rotate(var(--rot1, 6deg));
+      }
+
+      90% {
+        opacity: var(--icon-op, 0.2);
+      }
+
+      100% {
+        transform: translateY(-115vh) translateX(calc(var(--drift, 20px) * 2)) rotate(var(--rot2, -4deg));
+        opacity: 0;
       }
     }
 
@@ -299,14 +396,21 @@
 
       .grain,
       .cine-sweep::before,
+      .cine-sweep::after,
       .film-rail,
       .ambient::before,
       .ambient::after,
       .particle,
+      .ember,
+      .hobby-icon,
       .nav-avatar::before,
-      .reel-ring,
-      #nav::after {
+      .reel-ring {
         animation: none !important
+      }
+
+      .embers,
+      .hobby-icons {
+        display: none
       }
     }
 
@@ -336,7 +440,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 75% 55% at 50% 38%, rgba(255, 145, 66, 0.10), transparent 70%);
+      background: radial-gradient(ellipse 75% 55% at 50% 38%, rgba(128, 82, 255, 0.10), transparent 70%);
       pointer-events: none;
     }
 
@@ -388,63 +492,28 @@
       }
     }
 
-    /* Ticket-stub notch — punches a little hole at each end of a pill label */
-    .splash-badge,
-    .sec-label {
-      position: relative;
-    }
-
-    .splash-badge::before,
-    .splash-badge::after,
-    .sec-label::before,
-    .sec-label::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--bg);
-      transform: translateY(-50%);
-    }
-
-    .splash-badge::before,
-    .sec-label::before {
-      left: -4.5px;
-    }
-
-    .splash-badge::after,
-    .sec-label::after {
-      right: -4.5px;
-    }
-
+    /* Section label — flat uppercase amber text, no box, no border (Dala's headline-block spec) */
     .splash-badge {
-      display: inline-block;
-      padding: 0.45rem 1.15rem;
-      border-radius: 9999px;
-      background: rgba(251, 86, 7, 0.15);
-      border: 1px dashed rgba(255, 204, 77, 0.4);
-      color: var(--p300);
+      display: block;
+      color: var(--gold);
       font-size: 0.82rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
       margin-bottom: 2rem;
       opacity: 0;
       animation: fadeUp 0.7s ease forwards 0.3s;
     }
 
-    /* Marquee poster type for the big splash name */
+    /* Big splash name — weightless display type, negative tracking, bone white */
     .splash-typed {
       font-family: var(--display);
-      font-size: clamp(3rem, 9vw, 7rem);
-      font-weight: 300;
-      letter-spacing: 0.06em;
+      font-size: clamp(3rem, 10vw, 7.2rem);
+      font-weight: 400;
+      letter-spacing: -0.03em;
       line-height: 1;
       margin-bottom: 1.4rem;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--text);
       min-height: 1.15em;
     }
 
@@ -474,9 +543,10 @@
     }
 
     .splash-sub {
-      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      color: var(--text-muted);
-      line-height: 1.75;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      font-weight: 200;
+      color: var(--text-soft);
+      line-height: 1.5;
       max-width: 520px;
       margin: 0 auto 2.8rem;
       opacity: 0;
@@ -487,21 +557,21 @@
       display: inline-block;
       padding: 0.9rem 2.6rem;
       border-radius: 9999px;
-      background: var(--grad);
+      background: var(--p500);
       color: #fff;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 0.95rem;
+      letter-spacing: 0.025em;
       border: none;
       cursor: pointer;
-      box-shadow: 0 8px 28px rgba(251, 86, 7, 0.35);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, background 0.2s;
       opacity: 0;
       animation: fadeUp 0.8s ease forwards 2.5s;
     }
 
     .splash-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 14px 36px rgba(251, 86, 7, 0.45)
+      background: var(--p600)
     }
 
     /* Floating particles */
@@ -554,43 +624,12 @@
       left: 0;
       right: 0;
       z-index: 500;
-      background: rgba(8, 6, 16, 0);
-      backdrop-filter: blur(0px);
-      transition: background 0.5s ease, backdrop-filter 0.5s ease, border-color 0.5s ease;
-      border-bottom: 1px solid transparent;
+      background: transparent;
+      transition: background 0.4s ease;
     }
 
     #nav.scrolled {
       background: var(--nav-bg);
-      backdrop-filter: blur(22px);
-      border-bottom-color: var(--border);
-    }
-
-    /* Marquee chasing lights — lights up along the nav's underside once scrolled */
-    #nav::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -2px;
-      height: 2px;
-      pointer-events: none;
-      background-image: radial-gradient(circle, var(--gold) 1.4px, transparent 1.6px);
-      background-size: 24px 2px;
-      background-repeat: repeat-x;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      animation: marqueeChase 1.1s steps(4) infinite;
-    }
-
-    #nav.scrolled::after {
-      opacity: 0.85;
-    }
-
-    @keyframes marqueeChase {
-      to {
-        background-position: 24px 0
-      }
     }
 
     .nav-inner {
@@ -624,7 +663,7 @@
       font-weight: 700;
       font-size: 0.95rem;
       flex-shrink: 0;
-      box-shadow: 0 0 0 2px rgba(255, 204, 77, 0.2);
+      box-shadow: 0 0 0 2px rgba(255, 184, 41, 0.2);
     }
 
     /* Slow-spinning aperture ring — camera-iris nod behind the avatar */
@@ -647,34 +686,33 @@
 
     .nav-name {
       font-family: var(--display);
-      font-size: 1.3rem;
+      font-size: 1.15rem;
       font-weight: 400;
-      letter-spacing: 0.06em;
+      letter-spacing: -0.01em;
       color: var(--text);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 0.15rem;
+      gap: 1.6rem;
       list-style: none
     }
 
+    /* Ghost text links — no background, no border; hierarchy from color alone */
     .nav-links a {
       text-decoration: none;
-      padding: 0.45rem 0.95rem;
-      border-radius: 9999px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
       color: var(--text-muted);
-      transition: background 0.2s, color 0.2s;
+      transition: color 0.2s;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
-      background: rgba(251, 86, 7, 0.1);
-      color: var(--p600);
+      color: var(--text);
     }
 
     .mob-btn {
@@ -682,7 +720,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      color: var(--p600);
+      color: var(--p400);
       padding: 4px
     }
 
@@ -690,9 +728,8 @@
       display: none;
       flex-direction: column;
       background: var(--mob-bg);
-      border-top: 1px solid var(--border);
       padding: 1rem 2.5rem 1.5rem;
-      gap: 0.15rem;
+      gap: 0.9rem;
     }
 
     .mob-menu.open {
@@ -701,17 +738,16 @@
 
     .mob-menu a {
       text-decoration: none;
-      padding: 0.65rem 0.8rem;
-      border-radius: 10px;
-      font-size: 0.88rem;
-      font-weight: 500;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
       color: var(--text-muted);
-      transition: background 0.2s, color 0.2s;
+      transition: color 0.2s;
     }
 
     .mob-menu a:hover {
-      background: rgba(251, 86, 7, 0.08);
-      color: var(--p600)
+      color: var(--text)
     }
 
     @media(max-width:768px) {
@@ -761,45 +797,38 @@
       }
     }
 
-    /* Pill label (from attachment) */
+    /* Section label — flat uppercase amber text, no box, no border */
     .sec-label {
-      display: inline-block;
-      padding: 0.28rem 0.85rem;
-      border-radius: 9999px;
-      background: rgba(251, 86, 7, 0.10);
-      border: 1px dashed rgba(251, 86, 7, 0.32);
-      color: var(--p600);
-      font-size: 0.72rem;
+      display: block;
+      color: var(--gold);
+      font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-bottom: 0.9rem;
     }
 
-    /* Section title — marquee poster display */
+    /* Section title — weightless display type, scale over weight for hierarchy */
     .sec-title {
       font-family: var(--display);
-      font-size: clamp(2.6rem, 5.8vw, 4.3rem);
+      font-size: clamp(2.8rem, 6.4vw, 5rem);
       font-weight: 400;
-      letter-spacing: 0.05em;
+      letter-spacing: -0.03em;
       line-height: 1.02;
       color: var(--text);
       margin-bottom: 0.85rem;
     }
 
     .sec-title em {
-      font-family: var(--serif);
-      font-style: italic;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-style: normal;
+      color: var(--gold);
     }
 
     .sec-sub {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.82;
+      font-size: 1.1rem;
+      font-weight: 200;
+      color: var(--text-soft);
+      line-height: 1.6;
       max-width: 540px;
       margin-bottom: 3rem;
     }
@@ -809,7 +838,7 @@
       max-width: 1120px;
       margin: 0 auto;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(251, 86, 7, 0.2) 35%, rgba(251, 86, 7, 0.2) 65%, transparent);
+      background: linear-gradient(90deg, transparent, rgba(128, 82, 255, 0.2) 35%, rgba(128, 82, 255, 0.2) 65%, transparent);
     }
 
     /* ── REVEAL ── */
@@ -852,8 +881,8 @@
    IMAGE PLACEHOLDER UTIL
 ════════════════════════════ */
     .img-ph {
-      background: linear-gradient(135deg, rgba(251, 86, 7, 0.12), rgba(184, 24, 24, 0.08));
-      border: 1px dashed rgba(255, 204, 77, 0.2);
+      background: linear-gradient(135deg, rgba(128, 82, 255, 0.12), rgba(21, 132, 110, 0.08));
+      border: 1px dashed rgba(255, 184, 41, 0.2);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -868,7 +897,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 50%, rgba(251, 86, 7, 0.07), transparent 70%);
+      background: radial-gradient(ellipse at 50% 50%, rgba(128, 82, 255, 0.07), transparent 70%);
     }
 
     .img-ph svg {
@@ -907,23 +936,19 @@
       }
     }
 
-    /* The big marquee poster name */
+    /* The big display name — weightless, negative tracking */
     .about-name {
       font-family: var(--display);
-      font-size: clamp(3rem, 7.4vw, 5.6rem);
+      font-size: clamp(3.2rem, 8vw, 6.2rem);
       font-weight: 400;
-      letter-spacing: 0.05em;
+      letter-spacing: -0.03em;
       line-height: 0.98;
       margin-bottom: 0.75rem;
     }
 
     .about-name .grad {
-      font-family: var(--serif);
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-style: italic;
+      font-style: normal;
+      color: var(--gold);
     }
 
     .about-role {
@@ -935,32 +960,33 @@
     }
 
     .about-bio {
-      font-size: 1rem;
-      line-height: 1.88;
+      font-size: 1.1rem;
+      font-weight: 200;
+      line-height: 1.5;
       color: var(--text-soft);
       max-width: 500px;
       margin-bottom: 2rem;
     }
 
-    /* CTA button (gradient pill from attachment) */
+    /* Primary action — the sole filled violet pill CTA */
     .btn-grad {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.75rem 1.8rem;
       border-radius: 9999px;
-      background: var(--grad);
+      background: var(--p500);
       color: #fff;
       font-weight: 600;
       font-size: 0.88rem;
+      letter-spacing: 0.02em;
       text-decoration: none;
-      box-shadow: 0 6px 22px rgba(251, 86, 7, 0.32);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, background 0.2s;
     }
 
     .btn-grad:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(251, 86, 7, 0.42)
+      background: var(--p600)
     }
 
     /* Photo col */
@@ -996,7 +1022,7 @@
       left: 10px;
       right: -10px;
       bottom: -10px;
-      border: 1px solid rgba(255, 204, 77, 0.18);
+      border: 1px solid rgba(255, 184, 41, 0.18);
       z-index: -1;
     }
 
@@ -1119,23 +1145,20 @@
       text-align: right
     }
 
-    /* Skills chips (pill style from attachment) */
+    /* Skills chips — ghost tags, 9999px radius per the tags token */
     .skills-title {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-weight: 300;
-      letter-spacing: 0.03em;
+      font-family: var(--display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
       color: var(--text);
       margin-bottom: 1.1rem;
       text-align: center;
     }
 
     .skills-title em {
-      font-style: italic;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text
+      font-style: normal;
+      color: var(--gold);
     }
 
     .chips-row {
@@ -1153,16 +1176,15 @@
       font-size: 0.79rem;
       font-weight: 500;
       letter-spacing: 0.03em;
-      background: rgba(251, 86, 7, 0.08);
-      border: 1px solid rgba(251, 86, 7, 0.2);
-      color: var(--p700);
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      background: transparent;
+      border: 1px solid var(--border-mid);
+      color: var(--text-soft);
+      transition: border-color 0.2s, color 0.2s;
     }
 
     .chip:hover {
-      background: rgba(251, 86, 7, 0.16);
-      border-color: rgba(251, 86, 7, 0.36);
-      color: var(--p600)
+      border-color: var(--p500);
+      color: var(--p300)
     }
 
     /* ════════════════════════════
@@ -1184,12 +1206,11 @@
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 24px;
       padding: 1.7rem;
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s;
+      transition: transform 0.3s var(--ease), border-color 0.3s;
     }
 
     .card::before {
@@ -1199,7 +1220,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: var(--grad);
+      background: var(--p500);
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.5s var(--ease);
@@ -1207,8 +1228,7 @@
 
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(251, 86, 7, 0.28);
+      border-color: var(--border-mid);
     }
 
     .card:hover::before {
@@ -1240,8 +1260,8 @@
       display: inline-block;
       padding: 0.22rem 0.7rem;
       border-radius: 9999px;
-      background: rgba(251, 86, 7, 0.08);
-      border: 1px solid rgba(251, 86, 7, 0.18);
+      background: rgba(128, 82, 255, 0.08);
+      border: 1px solid rgba(128, 82, 255, 0.18);
       font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.12em;
@@ -1302,8 +1322,8 @@
     .chip-sm {
       padding: 0.25rem 0.7rem;
       border-radius: 9999px;
-      background: rgba(251, 86, 7, 0.07);
-      border: 1px solid rgba(251, 86, 7, 0.16);
+      background: rgba(128, 82, 255, 0.07);
+      border: 1px solid rgba(128, 82, 255, 0.16);
       font-size: 0.72rem;
       font-weight: 500;
       color: var(--p600);
@@ -1331,11 +1351,10 @@
       text-decoration: none;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 24px;
       padding: 1.7rem;
       text-align: center;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      transition: transform 0.25s, border-color 0.25s;
       position: relative;
       overflow: hidden;
     }
@@ -1347,7 +1366,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: var(--grad);
+      background: var(--p500);
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.45s var(--ease);
@@ -1355,8 +1374,7 @@
 
     .contact-tile:hover {
       transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(251, 86, 7, 0.28)
+      border-color: var(--border-mid)
     }
 
     .contact-tile:hover::before {
@@ -1370,13 +1388,10 @@
     }
 
     .contact-tile h2 {
-      font-family: var(--serif);
-      font-size: 1.1rem;
+      font-family: var(--display);
+      font-size: 1.2rem;
       font-weight: 400;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--text);
       margin-bottom: 0.2rem;
     }
 
@@ -1418,17 +1433,16 @@
     }
 
     .gal-item {
-      border-radius: 16px;
+      border-radius: 24px;
       overflow: hidden;
       position: relative;
       border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s var(--ease), box-shadow 0.3s;
+      transition: transform 0.3s var(--ease), border-color 0.3s;
     }
 
     .gal-item:hover {
       transform: translateY(-4px);
-      box-shadow: var(--shadow-md)
+      border-color: var(--border-mid)
     }
 
     /* Camera-viewfinder focus brackets — matches the photo frame's hover cue */
@@ -1517,10 +1531,7 @@
     }
 
     footer strong {
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--p400);
       font-weight: 600;
     }
 
@@ -1534,7 +1545,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: rgba(251, 86, 7, 0.3)
+      background: rgba(128, 82, 255, 0.3)
     }
   </style>
 </head>
@@ -1547,6 +1558,8 @@
   <div class="film-rail right" aria-hidden="true"></div>
   <div class="film-edge top" aria-hidden="true"></div>
   <div class="film-edge bottom" aria-hidden="true"></div>
+  <div class="hobby-icons" id="hobbyIcons" aria-hidden="true"></div>
+  <div class="embers" id="embers" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
   <!-- ════ SPLASH ════ -->
@@ -1868,44 +1881,44 @@
     <!-- ── GALLERY ── -->
     <div class="sec" id="gallery">
       <div class="rv"><span class="sec-label">Gallery</span></div>
-      <h2 class="sec-title rv d1">Visual <em>Works</em></h2>
-      <p class="sec-sub rv d2">Sketches, artwork, films, and creative explorations.</p>
+      <h2 class="sec-title rv d1">Behind the <em>Lens</em></h2>
+      <p class="sec-sub rv d2">Photos from film sets, projects, and everyday moments.</p>
 
       <div class="gallery-grid rv">
 
         <!-- Item 2 -->
         <div class="gal-item">
-          <img src="Sketch-2.jpg" alt="Anime Figure"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Anime Figure</span></div>'">
-          <div class="gal-cap">Anime Figure</div>
+          <img src="Photo-2.jpg" alt="On Set"
+            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>On Set</span></div>'">
+          <div class="gal-cap">On Set</div>
         </div>
 
         <!-- Item 3 -->
         <div class="gal-item">
-          <img src="Sketch-3.jpg" alt="Painted Portrait"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Painted Portrait</span></div>'">
-          <div class="gal-cap">Painted Portrait</div>
+          <img src="Photo-3.jpg" alt="Behind the Scenes"
+            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Behind the Scenes</span></div>'">
+          <div class="gal-cap">Behind the Scenes</div>
         </div>
 
         <!-- Item 4 -->
         <div class="gal-item">
-          <img src="Sketch-4.jpg" alt="Caricatures"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Caricatures</span></div>'">
-          <div class="gal-cap">Caricatures</div>
+          <img src="Photo-4.jpg" alt="Candid Moment"
+            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Candid Moment</span></div>'">
+          <div class="gal-cap">Candid Moment</div>
         </div>
 
         <!-- Item 5 -->
         <div class="gal-item">
-          <img src="Sketch-5.jpg" alt="Armored Figure"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Armored Figure</span></div>'">
-          <div class="gal-cap">Armored Figure</div>
+          <img src="Photo-5.jpg" alt="With the Crew"
+            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>With the Crew</span></div>'">
+          <div class="gal-cap">With the Crew</div>
         </div>
 
         <!-- Item 6 -->
         <div class="gal-item">
-          <img src="Sketch-6.jpg" alt="Character Study"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Character Study</span></div>'">
-          <div class="gal-cap">Character Study</div>
+          <img src="Photo-6.jpg" alt="Portrait"
+            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Portrait</span></div>'">
+          <div class="gal-cap">Portrait</div>
         </div>
 
       </div>
@@ -1938,7 +1951,7 @@
     }
     setTimeout(type, 500);
 
-    /* ── PARTICLES ── */
+    /* ── PARTICLES (splash only) ── */
     const pw = document.getElementById('particles-wrap');
     for (let i = 0; i < 20; i++) {
       const p = document.createElement('div');
@@ -1947,6 +1960,65 @@
       p.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random() * 100}%;
     animation-delay:${Math.random() * 9}s;animation-duration:${Math.random() * 5 + 7}s;opacity:0.22;`;
       pw.appendChild(p);
+    }
+
+    /* ── EMBERS (whole site, keeps drifting after the splash fades) ── */
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+      const embersWrap = document.getElementById('embers');
+      const emberHues = ['#ffcc4d', '#fb5607', '#ff9a52'];
+      for (let i = 0; i < 30; i++) {
+        const e = document.createElement('div');
+        e.className = 'ember';
+        const sz = Math.random() * 4 + 2;
+        const drift = (Math.random() * 90 - 45).toFixed(0) + 'px';
+        e.style.cssText = `left:${Math.random() * 100}%;width:${sz}px;height:${sz}px;
+      color:${emberHues[i % emberHues.length]};
+      animation-duration:${(Math.random() * 8 + 9).toFixed(1)}s;
+      animation-delay:${(Math.random() * 14).toFixed(2)}s;
+      --drift:${drift};`;
+        embersWrap.appendChild(e);
+      }
+    }
+
+    /* ── HOBBY ICONS (film camera, reel, code, chess, pen — drifting nods to the About/Activities content) ── */
+    if (!reduceMotion) {
+      const hobbyWrap = document.getElementById('hobbyIcons');
+      // Same glyphs used on the Activities cards below, so the background echoes the real content
+      const hobbyGlyphs = [
+        '<path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.36a1 1 0 0 1-1.447.89L15 14"/><rect x="1" y="6" width="15" height="12" rx="2"/>', // camera
+        '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.2"/><circle cx="12" cy="5.5" r="1.4"/><circle cx="12" cy="18.5" r="1.4"/><circle cx="5.5" cy="12" r="1.4"/><circle cx="18.5" cy="12" r="1.4"/>', // film reel
+        '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>', // code
+        '<rect x="2" y="2" width="20" height="20" rx="1"/><path d="M2 9h20M2 15h20M9 2v20M15 2v20"/>', // chess
+        '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>', // pen
+      ];
+      // Weighted so filmmaking (camera + reel) shows up most often
+      const glyphIndex = () => {
+        const r = Math.random();
+        if (r < 0.3) return 0;
+        if (r < 0.55) return 1;
+        if (r < 0.7) return 2;
+        if (r < 0.85) return 3;
+        return 4;
+      };
+      const hobbyHues = ['var(--gold)', 'var(--p500)', 'var(--p400)'];
+      for (let i = 0; i < 11; i++) {
+        const wrap = document.createElement('div');
+        wrap.className = 'hobby-icon';
+        const sz = Math.random() * 18 + 26;
+        const drift = (Math.random() * 70 - 35).toFixed(0) + 'px';
+        const rot0 = (Math.random() * 16 - 8).toFixed(1) + 'deg';
+        const rot1 = (Math.random() * 16 - 8).toFixed(1) + 'deg';
+        const rot2 = (Math.random() * 16 - 8).toFixed(1) + 'deg';
+        wrap.style.cssText = `left:${(Math.random() * 96).toFixed(1)}%;width:${sz}px;height:${sz}px;
+      color:${hobbyHues[i % hobbyHues.length]};
+      animation-duration:${(Math.random() * 14 + 24).toFixed(1)}s;
+      animation-delay:${(Math.random() * 26).toFixed(2)}s;
+      --icon-op:${(Math.random() * 0.14 + 0.12).toFixed(2)};
+      --drift:${drift};--rot0:${rot0};--rot1:${rot1};--rot2:${rot2};`;
+        wrap.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">${hobbyGlyphs[glyphIndex()]}</svg>`;
+        hobbyWrap.appendChild(wrap);
+      }
     }
 
     /* ── ENTER ── */

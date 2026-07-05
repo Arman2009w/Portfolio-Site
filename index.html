@@ -71,7 +71,7 @@
       --teal: #15846e;
 
       /* Ambient overlay colors for the background motion layer */
-      --dot-color: rgba(128, 82, 255, 0.2);
+      --dot-color: rgba(150, 130, 255, 0.35);
       --ambient-1: rgba(128, 82, 255, 0.22);
       --ambient-2: rgba(21, 132, 110, 0.16);
       --nav-bg: rgba(0, 0, 0, 0.82);
@@ -89,14 +89,14 @@
       font-feature-settings: "ss01" 1;
     }
 
-    /* Dot pattern — soft purple dots on light background */
+    /* Dot pattern — crisp violet dots against the void */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+      background-image: radial-gradient(circle, var(--dot-color) 1.2px, transparent 1.3px);
       background-size: 28px 28px;
     }
 

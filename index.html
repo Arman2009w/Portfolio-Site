@@ -95,8 +95,25 @@
       width: 5px;
       height: 5px;
       background: var(--accent);
-      opacity: 0.55;
       border-radius: 1px;
+      animation: dotDrift linear infinite;
+    }
+
+    @keyframes dotDrift {
+      0% {
+        transform: translate(0, 0);
+        opacity: 0.2;
+      }
+
+      50% {
+        transform: translate(var(--dx, 18px), var(--dy, -22px));
+        opacity: 0.85;
+      }
+
+      100% {
+        transform: translate(0, 0);
+        opacity: 0.2;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -104,6 +121,14 @@
       .poly,
       .dot-sq {
         animation: none !important
+      }
+
+      .hero-name,
+      .hero-sub,
+      .hero-btn {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
       }
     }
 
@@ -295,7 +320,7 @@
       left: -20px;
       width: min(38vw, 480px);
       height: min(38vw, 480px);
-      animation: polySpin 70s linear infinite;
+      animation: polySpin 26s linear infinite;
     }
 
     .poly.b {
@@ -303,7 +328,7 @@
       right: -60px;
       width: min(34vw, 420px);
       height: min(34vw, 420px);
-      animation: polySpin 90s linear infinite reverse;
+      animation: polySpin 34s linear infinite reverse;
     }
 
     @keyframes polySpin {
@@ -315,8 +340,6 @@
     .hero-inner {
       position: relative;
       z-index: 2;
-      opacity: 0;
-      animation: fadeUp 0.9s var(--ease) forwards 0.15s;
     }
 
     .hero-name {
@@ -325,12 +348,16 @@
       letter-spacing: -0.03em;
       line-height: 1.02;
       margin-bottom: 1.1rem;
+      opacity: 0;
+      animation: heroFade 1.3s var(--ease) forwards 0.2s;
     }
 
     .hero-sub {
       font-size: 1.05rem;
       color: var(--text-muted);
       margin-bottom: 2.4rem;
+      opacity: 0;
+      animation: heroFade 1.1s var(--ease) forwards 0.75s;
     }
 
     .hero-sub .dot-sep {
@@ -350,6 +377,8 @@
       font-size: 0.92rem;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
+      opacity: 0;
+      animation: heroFade 1.1s var(--ease) forwards 1.05s;
     }
 
     .hero-btn:hover {
@@ -357,10 +386,10 @@
       box-shadow: 0 12px 30px rgba(111, 147, 242, 0.35);
     }
 
-    @keyframes fadeUp {
+    @keyframes heroFade {
       from {
         opacity: 0;
-        transform: translateY(18px)
+        transform: translateY(24px)
       }
 
       to {
@@ -779,13 +808,6 @@
       margin: 0.4rem 0 0.9rem;
     }
 
-    .tl-body {
-      font-size: 0.94rem;
-      color: var(--text-soft);
-      line-height: 1.7;
-      margin-bottom: 0.7rem;
-    }
-
     .tl-list {
       list-style: none;
     }
@@ -1174,20 +1196,21 @@
             <div class="tl-title-row">
               <div class="tl-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <rect x="2" y="3" width="20" height="14" rx="2" />
-                  <path d="M8 21h8M12 17v4" />
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
                 </svg>
               </div>
-              <h3>Computer Club</h3>
-              <span class="tl-badge">Director</span>
+              <h3>ThinkNeuro</h3>
+              <span class="tl-badge">SWE Intern</span>
             </div>
-            <span class="tl-date">1 YEAR</span>
+            <span class="tl-date">CURRENT</span>
           </div>
-          <p class="tl-meta">Leadership · Python &amp; AI Integration</p>
-          <p class="tl-body">Led junior and senior students in cybersecurity, Python, and AI integration.</p>
+          <p class="tl-meta">Software Engineering · Full-Stack Development</p>
           <ul class="tl-list">
-            <li><strong>Skills:</strong> Python, Public Speaking, Mentorship.</li>
-            <li><strong>Impact:</strong> Increased efficiency 30% via modular code.</li>
+            <li>Engineered <strong>Knot</strong>, a full-stack web application designed to streamline school club
+              memberships and management.</li>
+            <li>Implemented core features to facilitate student sign-ups, track member engagement, and simplify
+              administrative tasks for school clubs.</li>
           </ul>
         </div>
 
@@ -1196,20 +1219,21 @@
             <div class="tl-title-row">
               <div class="tl-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <polyline points="16 18 22 12 16 6" />
-                  <polyline points="8 6 2 12 8 18" />
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                 </svg>
               </div>
-              <h3>Technical Portfolio</h3>
-              <span class="tl-badge">Initiative</span>
+              <h3>WLF</h3>
+              <span class="tl-badge">Youth Ambassador</span>
             </div>
-            <span class="tl-date">3 YEARS</span>
+            <span class="tl-date">CURRENT</span>
           </div>
-          <p class="tl-meta">Development · Full-Stack Projects</p>
-          <p class="tl-body">Completed 50+ full-stack projects using Python, HTML/CSS, and JavaScript.</p>
+          <p class="tl-meta">World Literacy Foundation · Global Youth Advocacy</p>
           <ul class="tl-list">
-            <li><strong>Skills:</strong> UI/UX, Data Structures, Project Scoping.</li>
-            <li><strong>Impact:</strong> 95% test coverage in validation modules.</li>
+            <li>Served as a global youth advocate raising awareness and support for literacy initiatives and
+              education equality.</li>
+            <li>Led community outreach campaigns and youth-driven projects to provide learning resources to
+              underprivileged children.</li>
           </ul>
         </div>
 
@@ -1218,20 +1242,21 @@
             <div class="tl-title-row">
               <div class="tl-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.36a1 1 0 0 1-1.447.89L15 14" />
-                  <rect x="1" y="6" width="15" height="12" rx="2" />
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                 </svg>
               </div>
-              <h3>Student Filmmaker</h3>
-              <span class="tl-badge">Creative</span>
+              <h3>Synap Kids Programme</h3>
+              <span class="tl-badge">Facilitator</span>
             </div>
-            <span class="tl-date">3 YEARS</span>
+            <span class="tl-date">CURRENT</span>
           </div>
-          <p class="tl-meta">Cinema · Short Films</p>
-          <p class="tl-body">Conceptualized and directed short films blending technical and cinematic thinking.</p>
+          <p class="tl-meta">Early Childhood Education</p>
           <ul class="tl-list">
-            <li><strong>Skills:</strong> Screenwriting, Cinematography, Editing.</li>
-            <li><strong>Impact:</strong> Showcased work; refined via peer feedback.</li>
+            <li>Facilitated interactive educational sessions designed to foster cognitive development and early
+              learning skills in kids.</li>
+            <li>Collaborated with program leads to deliver engaging curriculum and hands-on activities for young
+              learners.</li>
           </ul>
         </div>
 
@@ -1240,20 +1265,21 @@
             <div class="tl-title-row">
               <div class="tl-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <rect x="2" y="2" width="20" height="20" rx="1" />
-                  <path d="M2 9h20M2 15h20M9 2v20M15 2v20" />
+                  <circle cx="12" cy="12" r="10" />
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
                 </svg>
               </div>
-              <h3>Chess &amp; Strategy</h3>
-              <span class="tl-badge">Discipline</span>
+              <h3>STEM Compass</h3>
+              <span class="tl-badge">CEO</span>
             </div>
-            <span class="tl-date">5+ YEARS</span>
+            <span class="tl-date">CURRENT</span>
           </div>
-          <p class="tl-meta">Focus · Pattern Recognition</p>
-          <p class="tl-body">Practiced chess to sharpen pattern recognition and decision-making under pressure.</p>
+          <p class="tl-meta">Qatar's First Student-Led STEM Magazine</p>
           <ul class="tl-list">
-            <li><strong>Skills:</strong> Critical Thinking, Patience, Analysis.</li>
-            <li><strong>Impact:</strong> Improved consistency across academic work.</li>
+            <li>Founded and lead <strong>STEM Compass</strong>, Qatar's first <strong>student-led STEM
+                magazine</strong>.</li>
+            <li>Publish content that educates aspiring professionals on <strong>career paths</strong> across
+              STEM-related fields.</li>
           </ul>
         </div>
 
@@ -1262,42 +1288,20 @@
             <div class="tl-title-row">
               <div class="tl-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M8 12l2 2 4-4" />
+                  <rect x="2" y="3" width="20" height="14" rx="2" />
+                  <path d="M8 21h8M12 17v4" />
                 </svg>
               </div>
-              <h3>Badminton &amp; Fitness</h3>
-              <span class="tl-badge">Wellness</span>
+              <h3>Computer &amp; Robotics Club</h3>
+              <span class="tl-badge">Director</span>
             </div>
-            <span class="tl-date">3 YEARS</span>
+            <span class="tl-date">CURRENT</span>
           </div>
-          <p class="tl-meta">Discipline · Competitive Training</p>
-          <p class="tl-body">Built agility and resilience through regular training and competitive badminton.</p>
+          <p class="tl-meta">Leadership · Python &amp; AI Integration</p>
           <ul class="tl-list">
-            <li><strong>Skills:</strong> Discipline, Teamwork, Time Management.</li>
-            <li><strong>Impact:</strong> Sustained energy through intense workloads.</li>
-          </ul>
-        </div>
-
-        <div class="tl-item rv d6">
-          <div class="tl-head">
-            <div class="tl-title-row">
-              <div class="tl-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M12 20h9" />
-                  <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
-                </svg>
-              </div>
-              <h3>Creative Writing</h3>
-              <span class="tl-badge">Storytelling</span>
-            </div>
-            <span class="tl-date">4 YEARS</span>
-          </div>
-          <p class="tl-meta">Narrative · Short Stories &amp; Scripts</p>
-          <p class="tl-body">Developed short stories and scripts blending analytical structure with emotional depth.</p>
-          <ul class="tl-list">
-            <li><strong>Skills:</strong> Narrative Design, Clarity, Editing.</li>
-            <li><strong>Impact:</strong> Strengthened personal voice and presentation confidence.</li>
+            <li>Led junior and senior students in <strong>cybersecurity</strong>, <strong>Python</strong>, and
+              <strong>AI integration</strong>.</li>
+            <li>Increased efficiency <strong>30%</strong> through modular, reusable code across club projects.</li>
           </ul>
         </div>
 
@@ -1460,18 +1464,25 @@
       applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
     });
 
-    /* ── SPARSE DECORATIVE DOTS ── */
+    /* ── SPARSE DECORATIVE DOTS — visibly drifting, each on its own rhythm ── */
     const dotsWrap = document.getElementById('dotsScatter');
     const dotSpots = [
       { top: '18%', left: '17%' }, { top: '68%', left: '62%' },
       { top: '88%', left: '10%' }, { top: '34%', left: '92%' },
       { top: '55%', left: '6%' }, { top: '8%', left: '78%' },
+      { top: '42%', left: '38%' }, { top: '76%', left: '84%' },
+      { top: '26%', left: '55%' }, { top: '62%', left: '22%' },
     ];
     dotSpots.forEach(spot => {
       const d = document.createElement('div');
       d.className = 'dot-sq';
       d.style.top = spot.top;
       d.style.left = spot.left;
+      const dx = (Math.random() * 50 - 25).toFixed(0) + 'px';
+      const dy = (Math.random() * 50 - 25).toFixed(0) + 'px';
+      const dur = (Math.random() * 4 + 5).toFixed(1) + 's';
+      const delay = (Math.random() * -8).toFixed(1) + 's';
+      d.style.cssText += `--dx:${dx};--dy:${dy};animation-duration:${dur};animation-delay:${delay};`;
       dotsWrap.appendChild(d);
     });
 

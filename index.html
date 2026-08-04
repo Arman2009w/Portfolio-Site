@@ -8,7 +8,7 @@
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AC%3C/text%3E%3C/svg%3E">
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
   <style>
     *,
@@ -24,51 +24,61 @@
       font-size: 18px;
     }
 
-    /* ── DESIGN TOKENS ── */
+    /* ── DESIGN TOKENS — soft pastel brand-deck theme ── */
     :root {
-      --bg: #0a0a0d;
-      --bg2: #0a0a0d;
-      --surface: #16161b;
-      --surface2: rgba(255, 255, 255, 0.03);
+      --bg: #d2e0ea;
+      --bg2: #c6d7e4;
+      --surface: #ffffff;
+      --surface2: rgba(20, 30, 45, 0.035);
 
-      --text: #f5f5f7;
-      --text-soft: #c7c7cf;
-      --text-muted: #8b8b95;
+      --text: #14181f;
+      --text-soft: #454b57;
+      --text-muted: #737b89;
 
-      --accent: #93b4ff;
-      --accent-strong: #6f93f2;
-      --accent-soft: rgba(147, 180, 255, 0.14);
+      --accent: #8b3fd1;
+      --accent-strong: #7228ad;
+      --accent-soft: rgba(139, 63, 209, 0.1);
 
-      --border: rgba(255, 255, 255, 0.08);
-      --border-mid: rgba(255, 255, 255, 0.16);
+      --border: rgba(20, 30, 45, 0.08);
+      --border-mid: rgba(20, 30, 45, 0.15);
+      --shadow: 0 10px 30px rgba(31, 49, 66, 0.1), 0 2px 8px rgba(31, 49, 66, 0.06);
+
+      /* Rotating accent palette, sampled from the reference reel */
+      --rot-1: #5dc6f3;
+      --rot-2: #6be790;
+      --rot-3: #ffa648;
+      --rot-4: #d083fa;
+      --rot-5: #a0aeba;
 
       --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --display: 'Playfair Display', Georgia, serif;
       --mono: 'JetBrains Mono', 'SF Mono', monospace;
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
-      --nav-bg: rgba(10, 10, 13, 0.82);
-      --mob-bg: rgba(10, 10, 13, 0.97);
+      --nav-bg: rgba(210, 224, 234, 0.85);
+      --mob-bg: rgba(210, 224, 234, 0.98);
     }
 
-    :root[data-theme="light"] {
-      --bg: #f6f7fb;
-      --bg2: #eef0f6;
-      --surface: #ffffff;
-      --surface2: rgba(15, 20, 40, 0.03);
+    :root[data-theme="dark"] {
+      --bg: #14181f;
+      --bg2: #0f1319;
+      --surface: #1c212b;
+      --surface2: rgba(255, 255, 255, 0.04);
 
-      --text: #14151a;
-      --text-soft: #46474f;
-      --text-muted: #7b7c86;
+      --text: #f1f3f7;
+      --text-soft: #c7ccd6;
+      --text-muted: #8b93a3;
 
-      --accent: #4f6fd6;
-      --accent-strong: #3f5cc4;
-      --accent-soft: rgba(79, 111, 214, 0.1);
+      --accent: #c9a3ff;
+      --accent-strong: #b183f5;
+      --accent-soft: rgba(201, 163, 255, 0.14);
 
-      --border: rgba(15, 20, 40, 0.08);
-      --border-mid: rgba(15, 20, 40, 0.14);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-mid: rgba(255, 255, 255, 0.15);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.25);
 
-      --nav-bg: rgba(246, 247, 251, 0.85);
-      --mob-bg: rgba(246, 247, 251, 0.98);
+      --nav-bg: rgba(20, 24, 31, 0.82);
+      --mob-bg: rgba(20, 24, 31, 0.97);
     }
 
     body {
@@ -344,10 +354,11 @@
     }
 
     .hero-name {
+      font-family: var(--display);
       font-size: clamp(3.2rem, 7.8vw, 6.2rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.02;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
       margin-bottom: 1.1rem;
       opacity: 0;
       animation: heroFade 1.3s var(--ease) forwards 0.2s;
@@ -389,13 +400,11 @@
 
     @keyframes heroFade {
       from {
-        opacity: 0;
-        transform: translateY(24px)
+        opacity: 0
       }
 
       to {
-        opacity: 1;
-        transform: none
+        opacity: 1
       }
     }
 
@@ -429,9 +438,10 @@
     }
 
     .sec-title {
+      font-family: var(--display);
       font-size: clamp(2.5rem, 5vw, 3.4rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-weight: 700;
+      letter-spacing: -0.005em;
       color: var(--text);
       margin-bottom: 0.7rem;
     }
@@ -469,13 +479,11 @@
     /* ── REVEAL ── */
     .rv {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+      transition: opacity 0.9s ease;
     }
 
     .rv.in {
-      opacity: 1;
-      transform: none
+      opacity: 1
     }
 
     .rv.d1 {
@@ -595,6 +603,7 @@
       border-radius: 9999px;
       background: var(--surface);
       border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       font-size: 0.88rem;
       font-weight: 600;
       color: var(--text-soft);
@@ -610,10 +619,11 @@
     }
 
     .about-name {
+      font-family: var(--display);
       font-size: clamp(2.6rem, 5vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      line-height: 1.15;
       margin-bottom: 0.6rem;
     }
 
@@ -634,7 +644,8 @@
       gap: 1rem;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      box-shadow: var(--shadow);
+      border-radius: 24px;
       padding: 1.5rem 1.7rem;
       margin-bottom: 3.5rem;
     }
@@ -672,7 +683,8 @@
     }
 
     .skills-title {
-      font-size: 1.55rem;
+      font-family: var(--display);
+      font-size: 1.7rem;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 1.1rem;
@@ -769,8 +781,8 @@
       height: 34px;
       border-radius: 9px;
       background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--accent);
+      border: 1.5px solid var(--item-accent, var(--border));
+      color: var(--item-accent, var(--accent));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -794,8 +806,8 @@
       display: inline-block;
       padding: 0.2rem 0.65rem;
       border-radius: 9999px;
-      background: var(--accent-soft);
-      color: var(--accent);
+      background: color-mix(in srgb, var(--item-accent, var(--accent)) 16%, var(--surface));
+      color: var(--item-accent, var(--accent));
       font-size: 0.74rem;
       font-weight: 700;
       letter-spacing: 0.06em;
@@ -874,8 +886,15 @@
     .proj-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 22px;
+      border-top: 4px solid var(--item-accent, var(--accent));
+      box-shadow: var(--shadow);
+      border-radius: 26px;
       padding: 2rem;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+
+    .proj-card:hover {
+      transform: translateY(-4px);
     }
 
     .proj-card h3 {
@@ -886,7 +905,7 @@
     }
 
     .proj-cat {
-      color: var(--accent);
+      color: var(--item-accent, var(--accent));
       font-weight: 600;
       font-size: 0.98rem;
       margin-bottom: 0.9rem;
@@ -939,7 +958,8 @@
       text-decoration: none;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      box-shadow: var(--shadow);
+      border-radius: 24px;
       padding: 1.7rem;
       text-align: center;
       transition: transform 0.25s, border-color 0.25s;
@@ -992,10 +1012,11 @@
     .gal-item {
       background: var(--surface);
       height: 220px;
-      border-radius: 20px;
+      border-radius: 24px;
       overflow: hidden;
       position: relative;
       border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       transition: transform 0.3s var(--ease), border-color 0.3s;
     }
 
@@ -1221,7 +1242,7 @@
 
       <div class="timeline">
 
-        <div class="tl-item rv d1">
+        <div class="tl-item rv d1" style="--item-accent:var(--rot-1)">
           <div class="tl-head">
             <div class="tl-title-row">
               <div class="tl-icon"><img src="ThinkNeuro.jpg" alt="ThinkNeuro logo"></div>
@@ -1240,7 +1261,7 @@
           </ul>
         </div>
 
-        <div class="tl-item rv d2">
+        <div class="tl-item rv d2" style="--item-accent:var(--rot-2)">
           <div class="tl-head">
             <div class="tl-title-row">
               <div class="tl-icon"><img src="WLF.png" alt="World Literacy Foundation logo"></div>
@@ -1258,7 +1279,7 @@
           </ul>
         </div>
 
-        <div class="tl-item rv d3">
+        <div class="tl-item rv d3" style="--item-accent:var(--rot-3)">
           <div class="tl-head">
             <div class="tl-title-row">
               <div class="tl-icon"><img src="Synap-Kids.webp" alt="Synap Kids logo"></div>
@@ -1276,7 +1297,7 @@
           </ul>
         </div>
 
-        <div class="tl-item rv d4">
+        <div class="tl-item rv d4" style="--item-accent:var(--rot-4)">
           <div class="tl-head">
             <div class="tl-title-row">
               <div class="tl-icon"><img src="STEM-Compass.png" alt="The STEM Compass logo"></div>
@@ -1294,7 +1315,7 @@
           </ul>
         </div>
 
-        <div class="tl-item rv d5">
+        <div class="tl-item rv d5" style="--item-accent:var(--rot-5)">
           <div class="tl-head">
             <div class="tl-title-row">
               <div class="tl-icon"><img src="DPS-MIS-Logo.jpg" alt="DPS-Modern Indian School logo"></div>
@@ -1312,7 +1333,7 @@
           </ul>
         </div>
 
-        <div class="tl-item rv d6">
+        <div class="tl-item rv d6" style="--item-accent:var(--rot-1)">
           <div class="tl-head">
             <div class="tl-title-row">
               <div class="tl-icon"><img src="DataDairies-Logo.jpg" alt="DataDairies logo"></div>
@@ -1353,7 +1374,7 @@
 
       <div class="proj-list">
 
-        <div class="proj-card rv d1">
+        <div class="proj-card rv d1" style="--item-accent:var(--rot-2)">
           <h3>Python for Data Science</h3>
           <p class="proj-cat">IBM · Coursera · 2023</p>
           <p class="proj-status">🏆 Certified</p>
@@ -1362,7 +1383,7 @@
             <strong>data visualization</strong> for analytical applications.</p>
         </div>
 
-        <div class="proj-card rv d2">
+        <div class="proj-card rv d2" style="--item-accent:var(--rot-3)">
           <h3>Python Essentials</h3>
           <p class="proj-cat">Cisco · 2024</p>
           <p class="proj-status">🔒 Certified</p>
@@ -1371,7 +1392,7 @@
             <strong>portfolio-driven development</strong> for the modern tech landscape.</p>
         </div>
 
-        <div class="proj-card rv d3">
+        <div class="proj-card rv d3" style="--item-accent:var(--rot-4)">
           <h3>CS50X</h3>
           <p class="proj-cat">Harvard · 2025</p>
           <p class="proj-status">🌐 Completed</p>
@@ -1380,7 +1401,7 @@
             and JavaScript fundamentals.</p>
         </div>
 
-        <div class="proj-card rv d4">
+        <div class="proj-card rv d4" style="--item-accent:var(--rot-1)">
           <h3>Machine Learning</h3>
           <p class="proj-cat">Stanford · Andrew Ng · 2024</p>
           <p class="proj-status">🤖 Certified</p>
@@ -1491,8 +1512,7 @@
       localStorage.setItem('theme', theme);
     }
     const savedTheme = localStorage.getItem('theme');
-    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    applyTheme(savedTheme || (systemPrefersLight ? 'light' : 'dark'));
+    applyTheme(savedTheme || 'light');
     themeBtn.addEventListener('click', () => {
       applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
     });

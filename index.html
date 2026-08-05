@@ -161,9 +161,137 @@
 
       .poly,
       .dot-sq,
-      .bento-card {
+      .bento-card,
+      .float-badge {
         animation: none !important
       }
+    }
+
+    /* ════════════════════════════
+   DECORATIVE ACCENTS — floating badges, glow blobs, flourishes
+════════════════════════════ */
+    .float-badge {
+      position: absolute;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--item-accent, var(--accent));
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 3;
+      pointer-events: none;
+      animation: badgeFloat 6s ease-in-out infinite;
+    }
+
+    .fb1 {
+      top: 9.4rem;
+      left: 3%;
+      animation-delay: 0s;
+    }
+
+    .fb2 {
+      top: 9.4rem;
+      right: 3%;
+      animation-delay: 1.3s;
+    }
+
+    .fb3 {
+      top: 5.3rem;
+      left: 47%;
+      animation-delay: 2.6s;
+    }
+
+    @keyframes badgeFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-9px) rotate(-4deg);
+      }
+    }
+
+    @media(max-width:860px) {
+      .float-badge {
+        display: none;
+      }
+    }
+
+    .sec-head {
+      position: relative;
+    }
+
+    .sec-head::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 360px;
+      height: 240px;
+      background: radial-gradient(circle, var(--item-accent, var(--accent-soft)) 0%, transparent 72%);
+      opacity: 0.5;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .sec-title em,
+    .skills-title em {
+      position: relative;
+      display: inline-block;
+    }
+
+    .sec-title em::after,
+    .skills-title em::after {
+      content: '';
+      position: absolute;
+      left: 2%;
+      right: 2%;
+      bottom: -0.14em;
+      height: 0.16em;
+      background-color: currentColor;
+      opacity: 0.55;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q5 0 10 6 T20 6 T30 6 T40 6' stroke='black' stroke-width='3' fill='none'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q5 0 10 6 T20 6 T30 6 T40 6' stroke='black' stroke-width='3' fill='none'/%3E%3C/svg%3E");
+      -webkit-mask-size: 32px 12px;
+      mask-size: 32px 12px;
+      -webkit-mask-repeat: repeat-x;
+      mask-repeat: repeat-x;
+      pointer-events: none;
+    }
+
+    .palette-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+
+    .palette-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-right: 0.4rem;
+    }
+
+    .swatch {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--surface);
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
     }
 
     /* ════════════════════════════
@@ -469,14 +597,54 @@
       color: var(--text-muted);
     }
 
+    .bento-hero-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
     .bento-hero-photo {
-      align-self: flex-end;
-      width: 64px;
-      height: 64px;
+      position: relative;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid var(--border-mid);
+      flex-shrink: 0;
+    }
+
+    .bento-hero-photo::before {
+      content: '';
+      position: absolute;
+      inset: -16px;
+      background: radial-gradient(circle, var(--accent-soft) 0%, transparent 72%);
+      z-index: -1;
+      border-radius: 50%;
+    }
+
+    .bento-hero-photo img {
       border-radius: 50%;
       overflow: hidden;
-      border: 2px solid var(--border-mid);
-      margin-top: 1rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 1.4rem;
+    }
+
+    .hero-stat b {
+      display: block;
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .hero-stat span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
     }
 
     .bento-hero-photo img {
@@ -1408,6 +1576,10 @@
       <line x1="20" y1="140" x2="200" y2="220" />
     </svg>
 
+    <div class="float-badge fb1" style="--item-accent:var(--rot-1)" aria-hidden="true">🎬</div>
+    <div class="float-badge fb2" style="--item-accent:var(--rot-3)" aria-hidden="true">♟</div>
+    <div class="float-badge fb3" style="--item-accent:var(--rot-4)" aria-hidden="true">✎</div>
+
     <div class="home-intro">
       <span class="home-eyebrow">Portfolio</span>
       <p class="home-sub">Tap a card to explore.</p>
@@ -1420,9 +1592,15 @@
           <h1 class="bento-name">Arman<br>Mohapatra</h1>
           <p class="bento-tagline">Filmmaker · Developer · Writer · Chess Player</p>
         </div>
-        <div class="bento-hero-photo">
-          <img src="Photo-1.jpeg" alt="Arman Mohapatra"
-            onerror="this.parentElement.style.display='none'">
+        <div class="bento-hero-footer">
+          <div class="hero-stats">
+            <div class="hero-stat"><b>6</b><span>Active Roles</span></div>
+            <div class="hero-stat"><b>4</b><span>Certifications</span></div>
+          </div>
+          <div class="bento-hero-photo">
+            <img src="Photo-1.jpeg" alt="Arman Mohapatra"
+              onerror="this.parentElement.style.display='none'">
+          </div>
         </div>
       </button>
 
@@ -1487,7 +1665,7 @@
     </button>
 
     <!-- ── ABOUT ── -->
-    <div class="sec" id="about">
+    <div class="sec" id="view-about">
       <div class="about-layout">
         <div class="about-photo-col rv">
           <div class="photo-frame">
@@ -1534,8 +1712,8 @@
     </div>
 
     <!-- ── ACTIVITIES ── -->
-    <div class="sec" id="activities">
-      <div class="sec-head">
+    <div class="sec" id="view-activities">
+      <div class="sec-head" style="--item-accent:var(--rot-1)">
         <h2 class="sec-title rv">Extracurricular <em>Impact</em></h2>
         <span class="sec-label rv d1">WHERE I'VE APPLIED MYSELF</span>
         <p class="sec-sub rv d2">Where I apply leadership and technical skills in the real world.</p>
@@ -1664,8 +1842,8 @@
     </div>
 
     <!-- ── CREDENTIALS ── -->
-    <div class="sec" id="credentials">
-      <div class="sec-head">
+    <div class="sec" id="view-credentials">
+      <div class="sec-head" style="--item-accent:var(--rot-3)">
         <h2 class="sec-title rv">Learning &amp; <em>Certifications</em></h2>
         <span class="sec-label rv d1">THINGS I'VE COMPLETED</span>
         <p class="sec-sub rv d2">Professional courses and certifications that validate my technical expertise.</p>
@@ -1713,8 +1891,8 @@
     </div>
 
     <!-- ── CONTACT ── -->
-    <div class="sec" id="contact">
-      <div class="sec-head">
+    <div class="sec" id="view-contact">
+      <div class="sec-head" style="--item-accent:var(--rot-2)">
         <h2 class="sec-title rv">Get <em>In Touch</em></h2>
         <span class="sec-label rv d1">LET'S CONNECT</span>
         <p class="sec-sub rv d2">Focused on studies and projects — open to relevant collaboration and networking.</p>
@@ -1745,8 +1923,8 @@
     </div>
 
     <!-- ── GALLERY ── -->
-    <div class="sec" id="gallery">
-      <div class="sec-head">
+    <div class="sec" id="view-gallery">
+      <div class="sec-head" style="--item-accent:var(--rot-4)">
         <h2 class="sec-title rv">Behind the <em>Lens</em></h2>
         <span class="sec-label rv d1">SNAPSHOTS</span>
         <p class="sec-sub rv d2">Photos from film sets, projects, and everyday moments.</p>
@@ -1789,6 +1967,14 @@
 
     <!-- ── FOOTER ── -->
     <footer>
+      <div class="palette-strip" aria-hidden="true">
+        <span class="palette-label">Palette</span>
+        <span class="swatch" style="background:var(--rot-1)" title="#5DC6F3"></span>
+        <span class="swatch" style="background:var(--rot-2)" title="#6BE790"></span>
+        <span class="swatch" style="background:var(--rot-3)" title="#FFA648"></span>
+        <span class="swatch" style="background:var(--rot-4)" title="#D083FA"></span>
+        <span class="swatch" style="background:var(--rot-5)" title="#A0AEBA"></span>
+      </div>
       <p>Crafted with care by <strong>Arman Mohapatra</strong> &nbsp;·&nbsp; 2025</p>
     </footer>
 
@@ -1842,7 +2028,7 @@
     const navLinks = [...document.querySelectorAll('.nav-links a, .mob-menu a')];
 
     function showSectionOnly(id) {
-      allSecs.forEach(s => { s.style.display = s.id === id ? '' : 'none'; });
+      allSecs.forEach(s => { s.style.display = s.id === 'view-' + id ? '' : 'none'; });
     }
 
     function setActiveNav(id) {

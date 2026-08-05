@@ -103,26 +103,27 @@
 
     .dot-sq {
       position: absolute;
-      width: 5px;
-      height: 5px;
-      background: var(--accent);
+      width: var(--sz, 5px);
+      height: var(--sz, 5px);
+      background: var(--dot-color, var(--accent));
       border-radius: 1px;
       animation: dotDrift linear infinite;
+      will-change: transform;
     }
 
     @keyframes dotDrift {
       0% {
-        transform: translate(0, 0);
+        transform: translate(var(--px, 0px), var(--py, 0px)) translate(0, 0);
         opacity: 0.2;
       }
 
       50% {
-        transform: translate(var(--dx, 18px), var(--dy, -22px));
+        transform: translate(var(--px, 0px), var(--py, 0px)) translate(var(--dx, 18px), var(--dy, -22px));
         opacity: 0.85;
       }
 
       100% {
-        transform: translate(0, 0);
+        transform: translate(var(--px, 0px), var(--py, 0px)) translate(0, 0);
         opacity: 0.2;
       }
     }
@@ -133,6 +134,7 @@
       pointer-events: none;
       opacity: 0.9;
       z-index: 0;
+      will-change: transform;
     }
 
     .poly.a {
@@ -151,9 +153,31 @@
       animation: polySpin 34s linear infinite reverse;
     }
 
+    .poly.c {
+      top: -30px;
+      right: -30px;
+      width: min(20vw, 260px);
+      height: min(20vw, 260px);
+      opacity: 0.6;
+      animation: polySpin 20s linear infinite;
+    }
+
+    .poly.d {
+      bottom: -40px;
+      left: -30px;
+      width: min(22vw, 280px);
+      height: min(22vw, 280px);
+      opacity: 0.6;
+      animation: polySpin 30s linear infinite reverse;
+    }
+
     @keyframes polySpin {
+      from {
+        transform: translate(var(--px, 0px), var(--py, 0px)) rotate(0deg);
+      }
+
       to {
-        transform: rotate(360deg)
+        transform: translate(var(--px, 0px), var(--py, 0px)) rotate(360deg);
       }
     }
 
@@ -1555,7 +1579,7 @@
 
   <!-- ════ HOME — BENTO GRID ════ -->
   <div id="home-grid">
-    <svg class="poly a" viewBox="0 0 520 520" stroke="var(--border-mid)" stroke-width="1.2">
+    <svg class="poly a" data-depth="0.03" viewBox="0 0 520 520" stroke="var(--border-mid)" stroke-width="1.2">
       <polygon points="260,20 460,180 380,420 140,420 60,180" />
       <line x1="260" y1="20" x2="260" y2="260" />
       <line x1="460" y1="180" x2="260" y2="260" />
@@ -1567,13 +1591,28 @@
       <line x1="460" y1="180" x2="140" y2="420" />
       <line x1="60" y1="180" x2="380" y2="420" />
     </svg>
-    <svg class="poly b" viewBox="0 0 400 400" stroke="var(--border-mid)" stroke-width="1.2">
+    <svg class="poly b" data-depth="0.045" viewBox="0 0 400 400" stroke="var(--border-mid)" stroke-width="1.2">
       <polygon points="200,10 380,140 320,390 80,390 20,140" />
       <line x1="200" y1="10" x2="200" y2="220" />
       <line x1="380" y1="140" x2="200" y2="220" />
       <line x1="320" y1="390" x2="200" y2="220" />
       <line x1="80" y1="390" x2="200" y2="220" />
       <line x1="20" y1="140" x2="200" y2="220" />
+    </svg>
+    <svg class="poly c" data-depth="0.06" viewBox="0 0 300 300" stroke="var(--border-mid)" stroke-width="1.2">
+      <polygon points="150,10 280,80 280,220 150,290 20,220 20,80" />
+      <line x1="150" y1="10" x2="150" y2="150" />
+      <line x1="280" y1="80" x2="150" y2="150" />
+      <line x1="280" y1="220" x2="150" y2="150" />
+      <line x1="150" y1="290" x2="150" y2="150" />
+      <line x1="20" y1="220" x2="150" y2="150" />
+      <line x1="20" y1="80" x2="150" y2="150" />
+    </svg>
+    <svg class="poly d" data-depth="0.025" viewBox="0 0 320 320" stroke="var(--border-mid)" stroke-width="1.2">
+      <polygon points="160,20 300,300 20,300" />
+      <line x1="160" y1="20" x2="160" y2="300" />
+      <line x1="20" y1="300" x2="220" y2="130" />
+      <line x1="300" y1="300" x2="100" y2="130" />
     </svg>
 
     <div class="float-badge fb1" style="--item-accent:var(--rot-1)" aria-hidden="true">🎬</div>
@@ -2006,8 +2045,17 @@
       { top: '55%', left: '6%' }, { top: '8%', left: '78%' },
       { top: '42%', left: '38%' }, { top: '76%', left: '84%' },
       { top: '26%', left: '55%' }, { top: '62%', left: '22%' },
+      { top: '14%', left: '48%' }, { top: '48%', left: '14%' },
+      { top: '82%', left: '46%' }, { top: '6%', left: '30%' },
+      { top: '92%', left: '68%' }, { top: '36%', left: '72%' },
+      { top: '60%', left: '90%' }, { top: '22%', left: '3%' },
+      { top: '72%', left: '36%' }, { top: '10%', left: '62%' },
+      { top: '50%', left: '50%' }, { top: '30%', left: '20%' },
+      { top: '4%', left: '96%' }, { top: '96%', left: '92%' },
     ];
-    dotSpots.forEach(spot => {
+    const dotColors = ['var(--accent)', 'var(--rot-1)', 'var(--rot-2)', 'var(--rot-3)', 'var(--rot-4)'];
+    const parallaxEls = [];
+    dotSpots.forEach((spot, i) => {
       const d = document.createElement('div');
       d.className = 'dot-sq';
       d.style.top = spot.top;
@@ -2016,9 +2064,33 @@
       const dy = (Math.random() * 50 - 25).toFixed(0) + 'px';
       const dur = (Math.random() * 4 + 5).toFixed(1) + 's';
       const delay = (Math.random() * -8).toFixed(1) + 's';
-      d.style.cssText += `--dx:${dx};--dy:${dy};animation-duration:${dur};animation-delay:${delay};`;
+      const sz = (Math.random() * 4 + 3).toFixed(1) + 'px';
+      const depth = (Math.random() * 0.05 + 0.015);
+      d.style.cssText += `--dx:${dx};--dy:${dy};--sz:${sz};--dot-color:${dotColors[i % dotColors.length]};animation-duration:${dur};animation-delay:${delay};`;
+      d.dataset.depth = depth.toFixed(3);
       dotsWrap.appendChild(d);
+      parallaxEls.push(d);
     });
+    document.querySelectorAll('.poly').forEach(p => parallaxEls.push(p));
+
+    /* ── POINTER PARALLAX — background layers drift opposite the cursor ── */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      let px = 0, py = 0, raf = null;
+      function applyParallax() {
+        raf = null;
+        parallaxEls.forEach(el => {
+          const depth = parseFloat(el.dataset.depth || 0.02);
+          el.style.setProperty('--px', (px * depth).toFixed(1) + 'px');
+          el.style.setProperty('--py', (py * depth).toFixed(1) + 'px');
+        });
+      }
+      window.addEventListener('pointermove', e => {
+        px = e.clientX - window.innerWidth / 2;
+        py = e.clientY - window.innerHeight / 2;
+        if (!raf) raf = requestAnimationFrame(applyParallax);
+      }, { passive: true });
+    }
 
     /* ── SECTION VIEW-SWITCHER: bento grid ⇄ detail view ── */
     const SECTIONS = ['about', 'activities', 'credentials', 'contact', 'gallery'];

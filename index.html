@@ -127,19 +127,42 @@
       }
     }
 
+    .poly {
+      position: absolute;
+      fill: none;
+      pointer-events: none;
+      opacity: 0.9;
+      z-index: 0;
+    }
+
+    .poly.a {
+      top: -40px;
+      left: -20px;
+      width: min(30vw, 400px);
+      height: min(30vw, 400px);
+      animation: polySpin 26s linear infinite;
+    }
+
+    .poly.b {
+      bottom: -60px;
+      right: -60px;
+      width: min(28vw, 360px);
+      height: min(28vw, 360px);
+      animation: polySpin 34s linear infinite reverse;
+    }
+
+    @keyframes polySpin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
 
       .poly,
-      .dot-sq {
+      .dot-sq,
+      .bento-card {
         animation: none !important
-      }
-
-      .hero-name,
-      .hero-sub,
-      .hero-btn {
-        animation: none !important;
-        opacity: 1 !important;
-        transform: none !important;
       }
     }
 
@@ -179,6 +202,9 @@
       letter-spacing: -0.01em;
       color: var(--text);
       text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
     .nav-logo span {
@@ -200,6 +226,7 @@
       font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-muted);
+      cursor: pointer;
       transition: background 0.2s, color 0.2s;
     }
 
@@ -253,7 +280,8 @@
       font-size: 0.92rem;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 0 0 0 transparent;
+      cursor: pointer;
+      border: none;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
@@ -291,6 +319,7 @@
       font-size: 0.92rem;
       font-weight: 600;
       color: var(--text-muted);
+      cursor: pointer;
       transition: color 0.2s;
     }
 
@@ -309,93 +338,104 @@
     }
 
     /* ════════════════════════════
-   HERO
+   BENTO HOME GRID
 ════════════════════════════ */
-    #hero {
+    #home-grid {
       position: relative;
       max-width: 1180px;
       margin: 0 auto;
-      padding: 11rem 2.5rem 8rem;
-      overflow: hidden;
+      padding: 8.5rem 2.5rem 6rem;
+      opacity: 0;
+      transform: scale(0.99);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
-    .poly {
-      position: absolute;
-      fill: none;
-      pointer-events: none;
-      opacity: 0.9;
+    #home-grid.is-open {
+      opacity: 1;
+      transform: none;
     }
 
-    .poly.a {
-      top: -40px;
-      left: -20px;
-      width: min(38vw, 480px);
-      height: min(38vw, 480px);
-      animation: polySpin 26s linear infinite;
+    #home-grid.is-closing {
+      opacity: 0;
+      transform: scale(0.98);
     }
 
-    .poly.b {
-      bottom: -60px;
-      right: -60px;
-      width: min(34vw, 420px);
-      height: min(34vw, 420px);
-      animation: polySpin 34s linear infinite reverse;
-    }
-
-    @keyframes polySpin {
-      to {
-        transform: rotate(360deg)
-      }
-    }
-
-    .hero-inner {
+    .home-intro {
       position: relative;
       z-index: 2;
+      text-align: center;
+      margin-bottom: 2.5rem;
     }
 
-    .hero-name {
-      font-family: var(--display);
-      font-size: clamp(3.2rem, 7.8vw, 6.2rem);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      line-height: 1.05;
-      margin-bottom: 1.1rem;
-      opacity: 0;
-      animation: heroFade 1.3s var(--ease) forwards 0.2s;
-    }
-
-    .hero-sub {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      margin-bottom: 2.4rem;
-      opacity: 0;
-      animation: heroFade 1.1s var(--ease) forwards 0.75s;
-    }
-
-    .hero-sub .dot-sep {
+    .home-eyebrow {
+      display: block;
       color: var(--accent);
-      margin: 0 0.5em;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
     }
 
-    .hero-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.85rem 1.9rem;
-      border-radius: 9999px;
-      background: var(--accent-strong);
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.02rem;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+    .home-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0.6rem auto 0;
+    }
+
+    .bento {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 150px;
+      grid-auto-flow: row dense;
+      gap: 1.2rem;
+    }
+
+    .bento-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 1.7rem;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--sans);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
       opacity: 0;
-      animation: heroFade 1.1s var(--ease) forwards 1.05s;
+      animation: heroFade 0.8s var(--ease) forwards;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
     }
 
-    .hero-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(111, 147, 242, 0.35);
+    .bento-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .bento-card:nth-child(1) {
+      animation-delay: 0.1s
+    }
+
+    .bento-card:nth-child(2) {
+      animation-delay: 0.2s
+    }
+
+    .bento-card:nth-child(3) {
+      animation-delay: 0.3s
+    }
+
+    .bento-card:nth-child(4) {
+      animation-delay: 0.4s
+    }
+
+    .bento-card:nth-child(5) {
+      animation-delay: 0.5s
     }
 
     @keyframes heroFade {
@@ -408,27 +448,242 @@
       }
     }
 
+    .bento-hero {
+      grid-column: span 2;
+      grid-row: span 2;
+      justify-content: space-between;
+      border-top: 4px solid var(--accent);
+    }
+
+    .bento-name {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.08;
+      margin: 0.9rem 0 0.6rem;
+    }
+
+    .bento-tagline {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+    }
+
+    .bento-hero-photo {
+      align-self: flex-end;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--border-mid);
+      margin-top: 1rem;
+    }
+
+    .bento-hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bento-activities {
+      grid-column: span 2;
+      grid-row: span 1;
+      border-top: 4px solid var(--rot-1);
+    }
+
+    .bento-credentials {
+      grid-column: span 1;
+      grid-row: span 1;
+      border-top: 4px solid var(--rot-3);
+    }
+
+    .bento-contact {
+      grid-column: span 1;
+      grid-row: span 1;
+      border-top: 4px solid var(--rot-2);
+    }
+
+    .bento-gallery {
+      grid-column: span 2;
+      grid-row: span 1;
+      border-top: 4px solid var(--rot-4);
+    }
+
+    .bento-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--surface2);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .bento-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .bento-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .bento-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 0.8rem;
+    }
+
+    .bento-icon-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .bento-mini-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .bento-thumbs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .bento-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--surface2);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .bento-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media(max-width:760px) {
+      .bento {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .bento-hero {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+
+      .bento-activities,
+      .bento-gallery {
+        grid-column: span 2;
+      }
+
+      .bento-credentials,
+      .bento-contact {
+        grid-column: span 1;
+      }
+    }
+
+    @media(max-width:520px) {
+      .bento {
+        grid-template-columns: 1fr;
+      }
+
+      .bento-hero,
+      .bento-activities,
+      .bento-gallery,
+      .bento-credentials,
+      .bento-contact {
+        grid-column: span 1;
+        grid-row: auto;
+        min-height: 150px;
+      }
+
+      #home-grid {
+        padding: 7rem 1.5rem 4rem;
+      }
+    }
+
     /* ════════════════════════════
-   WRAPPER / SECTION BASE
+   DETAIL VIEW
 ════════════════════════════ */
-    #wrapper {
+    #detail-view {
+      display: none;
       position: relative;
       z-index: 1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    #detail-view.is-open {
+      opacity: 1;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: 1180px;
+      margin: 6.5rem auto 0;
+      padding: 0 2.5rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .back-btn-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+    }
+
+    .back-btn:hover {
+      color: var(--accent);
+    }
+
+    @media(max-width:640px) {
+      .back-btn {
+        margin-top: 5.5rem;
+        padding: 0 1.5rem;
+      }
     }
 
     .sec {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 6rem 2.5rem;
+      padding: 2rem 2.5rem 6rem;
     }
 
     @media(max-width:640px) {
       .sec {
-        padding: 4.5rem 1.5rem;
-      }
-
-      #hero {
-        padding: 8.5rem 1.5rem 5rem;
+        padding: 1.5rem 1.5rem 4rem;
       }
     }
 
@@ -467,13 +722,6 @@
       line-height: 1.6;
       max-width: 520px;
       margin: 0.9rem auto 0;
-    }
-
-    .divider {
-      max-width: 1180px;
-      margin: 0 auto;
-      height: 1px;
-      background: var(--border);
     }
 
     /* ── REVEAL ── */
@@ -722,7 +970,7 @@
     }
 
     /* ════════════════════════════
-   TIMELINE (Activities + Credentials-as-journey feel reused for Activities)
+   TIMELINE (Activities)
 ════════════════════════════ */
     .timeline {
       position: relative;
@@ -812,13 +1060,6 @@
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-    }
-
-    .tl-date {
-      font-family: var(--mono);
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      white-space: nowrap;
     }
 
     .tl-current {
@@ -1107,13 +1348,13 @@
   <!-- ════ NAV ════ -->
   <nav id="nav">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">AM<span>.</span></a>
+      <button class="nav-logo" onclick="goHome()">AM<span>.</span></button>
       <ul class="nav-links">
-        <li><a href="#about" class="active">About</a></li>
-        <li><a href="#activities">Activities</a></li>
-        <li><a href="#credentials">Credentials</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#gallery">Gallery</a></li>
+        <li><a data-section="about" onclick="openSection('about')">About</a></li>
+        <li><a data-section="activities" onclick="openSection('activities')">Activities</a></li>
+        <li><a data-section="credentials" onclick="openSection('credentials')">Credentials</a></li>
+        <li><a data-section="contact" onclick="openSection('contact')">Contact</a></li>
+        <li><a data-section="gallery" onclick="openSection('gallery')">Gallery</a></li>
       </ul>
       <div class="nav-right">
         <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
@@ -1127,7 +1368,7 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
         </button>
-        <a href="#contact" class="nav-cta">Let's talk</a>
+        <button class="nav-cta" onclick="openSection('contact')">Let's talk</button>
         <button class="mob-btn" id="mob-btn" aria-label="Menu">
           <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -1136,16 +1377,16 @@
       </div>
     </div>
     <div class="mob-menu" id="mob-menu">
-      <a href="#about" onclick="closeMob()">About</a>
-      <a href="#activities" onclick="closeMob()">Activities</a>
-      <a href="#credentials" onclick="closeMob()">Credentials</a>
-      <a href="#contact" onclick="closeMob()">Contact</a>
-      <a href="#gallery" onclick="closeMob()">Gallery</a>
+      <a onclick="openSection('about')">About</a>
+      <a onclick="openSection('activities')">Activities</a>
+      <a onclick="openSection('credentials')">Credentials</a>
+      <a onclick="openSection('contact')">Contact</a>
+      <a onclick="openSection('gallery')">Gallery</a>
     </div>
   </nav>
 
-  <!-- ════ HERO ════ -->
-  <div id="hero">
+  <!-- ════ HOME — BENTO GRID ════ -->
+  <div id="home-grid">
     <svg class="poly a" viewBox="0 0 520 520" stroke="var(--border-mid)" stroke-width="1.2">
       <polygon points="260,20 460,180 380,420 140,420 60,180" />
       <line x1="260" y1="20" x2="260" y2="260" />
@@ -1167,21 +1408,83 @@
       <line x1="20" y1="140" x2="200" y2="220" />
     </svg>
 
-    <div class="hero-inner">
-      <h1 class="hero-name">Arman Mohapatra</h1>
-      <p class="hero-sub">Filmmaker<span class="dot-sep">•</span>Developer<span class="dot-sep">•</span>Writer<span
-          class="dot-sep">•</span>Chess Player</p>
-      <a href="#activities" class="hero-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M19 12l-7 7-7-7" />
-        </svg>
-        Explore My Work
-      </a>
+    <div class="home-intro">
+      <span class="home-eyebrow">Portfolio</span>
+      <p class="home-sub">Tap a card to explore.</p>
+    </div>
+
+    <div class="bento">
+      <button class="bento-card bento-hero" onclick="openSection('about')">
+        <div>
+          <span class="home-eyebrow" style="margin-bottom:0">Hi, I'm</span>
+          <h1 class="bento-name">Arman<br>Mohapatra</h1>
+          <p class="bento-tagline">Filmmaker · Developer · Writer · Chess Player</p>
+        </div>
+        <div class="bento-hero-photo">
+          <img src="Photo-1.jpeg" alt="Arman Mohapatra"
+            onerror="this.parentElement.style.display='none'">
+        </div>
+      </button>
+
+      <button class="bento-card bento-activities" onclick="openSection('activities')">
+        <div class="bento-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z" />
+          </svg>
+        </div>
+        <h3>Activities</h3>
+        <p>Six current commitments — from a software internship to a self-founded STEM magazine.</p>
+        <span class="bento-open">Open →</span>
+      </button>
+
+      <button class="bento-card bento-credentials" onclick="openSection('credentials')">
+        <div class="bento-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z" />
+            <path d="M17 5h3a2 2 0 0 1-2 4h-1M7 5H4a2 2 0 0 0 2 4h1" />
+          </svg>
+        </div>
+        <h3>Credentials</h3>
+        <p>4 certifications in Python, web fundamentals &amp; machine learning.</p>
+        <span class="bento-open">Open →</span>
+      </button>
+
+      <button class="bento-card bento-gallery" onclick="openSection('gallery')">
+        <div class="bento-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <rect x="3" y="3" width="18" height="18" rx="3" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+        </div>
+        <h3>Gallery</h3>
+        <p>Behind the lens — photos from film sets and everyday moments.</p>
+        <span class="bento-open">Open →</span>
+      </button>
+
+      <button class="bento-card bento-contact" onclick="openSection('contact')">
+        <div class="bento-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.38 8.5 8.5 0 0 1-4-1L3 20l1.13-5.5A8.38 8.38 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z" />
+          </svg>
+        </div>
+        <h3>Contact</h3>
+        <p>LinkedIn, GitHub, Instagram &amp; email — let's connect.</p>
+        <span class="bento-open">Open →</span>
+      </button>
     </div>
   </div>
 
-  <!-- ════ MAIN ════ -->
-  <div id="wrapper">
+  <!-- ════ DETAIL VIEW ════ -->
+  <div id="detail-view">
+    <button class="back-btn" onclick="goHome()">
+      <span class="back-btn-inner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        Back to overview
+      </span>
+    </button>
 
     <!-- ── ABOUT ── -->
     <div class="sec" id="about">
@@ -1229,8 +1532,6 @@
         </div>
       </div>
     </div>
-
-    <div class="divider"></div>
 
     <!-- ── ACTIVITIES ── -->
     <div class="sec" id="activities">
@@ -1362,8 +1663,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
-
     <!-- ── CREDENTIALS ── -->
     <div class="sec" id="credentials">
       <div class="sec-head">
@@ -1413,8 +1712,6 @@
       </div>
     </div>
 
-    <div class="divider"></div>
-
     <!-- ── CONTACT ── -->
     <div class="sec" id="contact">
       <div class="sec-head">
@@ -1446,8 +1743,6 @@
         </a>
       </div>
     </div>
-
-    <div class="divider"></div>
 
     <!-- ── GALLERY ── -->
     <div class="sec" id="gallery">
@@ -1497,7 +1792,7 @@
       <p>Crafted with care by <strong>Arman Mohapatra</strong> &nbsp;·&nbsp; 2025</p>
     </footer>
 
-  </div><!-- /wrapper -->
+  </div><!-- /detail-view -->
 
   <script>
     /* ── THEME TOGGLE ── */
@@ -1539,15 +1834,88 @@
       dotsWrap.appendChild(d);
     });
 
-    /* ── NAV SCROLL + ACTIVE ── */
+    /* ── SECTION VIEW-SWITCHER: bento grid ⇄ detail view ── */
+    const SECTIONS = ['about', 'activities', 'credentials', 'contact', 'gallery'];
+    const homeGrid = document.getElementById('home-grid');
+    const detailView = document.getElementById('detail-view');
+    const allSecs = [...document.querySelectorAll('#detail-view .sec')];
+    const navLinks = [...document.querySelectorAll('.nav-links a, .mob-menu a')];
+
+    function showSectionOnly(id) {
+      allSecs.forEach(s => { s.style.display = s.id === id ? '' : 'none'; });
+    }
+
+    function setActiveNav(id) {
+      navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === id));
+    }
+
+    function openSection(id, opts) {
+      opts = opts || {};
+      if (SECTIONS.indexOf(id) === -1) return;
+      showSectionOnly(id);
+      setActiveNav(id);
+      closeMob();
+      if (opts.instant) {
+        homeGrid.style.display = 'none';
+        detailView.style.display = 'block';
+        detailView.classList.add('is-open');
+      } else {
+        homeGrid.classList.remove('is-open');
+        homeGrid.classList.add('is-closing');
+        setTimeout(() => {
+          homeGrid.style.display = 'none';
+          detailView.style.display = 'block';
+          requestAnimationFrame(() => detailView.classList.add('is-open'));
+        }, 320);
+      }
+      if (!opts.skipHash) location.hash = id;
+      window.scrollTo(0, 0);
+    }
+
+    function goHome(opts) {
+      opts = opts || {};
+      setActiveNav(null);
+      if (opts.instant) {
+        detailView.style.display = 'none';
+        homeGrid.style.display = '';
+        homeGrid.classList.add('is-open');
+      } else {
+        detailView.classList.remove('is-open');
+        setTimeout(() => {
+          detailView.style.display = 'none';
+          homeGrid.style.display = '';
+          homeGrid.classList.remove('is-closing');
+          requestAnimationFrame(() => homeGrid.classList.add('is-open'));
+        }, 320);
+      }
+      if (!opts.skipHash) {
+        history.pushState('', document.title, window.location.pathname + window.location.search);
+      }
+      window.scrollTo(0, 0);
+    }
+    window.openSection = openSection;
+    window.goHome = goHome;
+
+    window.addEventListener('hashchange', () => {
+      const id = location.hash.replace('#', '');
+      if (SECTIONS.indexOf(id) !== -1) openSection(id, { skipHash: true });
+      else goHome({ skipHash: true });
+    });
+
+    /* ── INITIAL VIEW (supports deep-linking via #hash) ── */
+    (function initView() {
+      const startId = location.hash.replace('#', '');
+      if (SECTIONS.indexOf(startId) !== -1) {
+        openSection(startId, { instant: true, skipHash: true });
+      } else {
+        homeGrid.classList.add('is-open');
+      }
+    })();
+
+    /* ── NAV SCROLL SHADOW ── */
     const nav = document.getElementById('nav');
-    const sections = [...document.querySelectorAll('.sec[id]')];
-    const navLinks = [...document.querySelectorAll('.nav-links a')];
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
-      let cur = '';
-      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) cur = s.id });
-      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
     }, { passive: true });
 
     /* ── MOBILE MENU ── */

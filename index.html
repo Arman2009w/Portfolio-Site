@@ -50,6 +50,11 @@
       --rot-4: #d083fa;
       --rot-5: #a0aeba;
 
+      /* Brand triad — purple/red/blue, baked into the design permanently */
+      --triad-purple: #8b3fd1;
+      --triad-red: #d1453f;
+      --triad-blue: #3f7dd1;
+
       --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
       --display: 'Playfair Display', Georgia, serif;
       --mono: 'JetBrains Mono', 'SF Mono', monospace;
@@ -77,33 +82,12 @@
       --border-mid: rgba(255, 255, 255, 0.15);
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.25);
 
+      --triad-purple: #c9a3ff;
+      --triad-red: #ff9d94;
+      --triad-blue: #a3c8ff;
+
       --nav-bg: rgba(20, 24, 31, 0.82);
       --mob-bg: rgba(20, 24, 31, 0.97);
-    }
-
-    /* ── ACCENT COLOR THEMES — layer on top of light/dark ── */
-    :root[data-accent="red"] {
-      --accent: #d1453f;
-      --accent-strong: #ad2f28;
-      --accent-soft: rgba(209, 69, 63, 0.1);
-    }
-
-    :root[data-theme="dark"][data-accent="red"] {
-      --accent: #ff9d94;
-      --accent-strong: #f58176;
-      --accent-soft: rgba(255, 157, 148, 0.14);
-    }
-
-    :root[data-accent="blue"] {
-      --accent: #3f7dd1;
-      --accent-strong: #2860ad;
-      --accent-soft: rgba(63, 125, 209, 0.1);
-    }
-
-    :root[data-theme="dark"][data-accent="blue"] {
-      --accent: #a3c8ff;
-      --accent-strong: #83aef5;
-      --accent-soft: rgba(163, 200, 255, 0.14);
     }
 
     body {
@@ -275,7 +259,9 @@
       .float-badge,
       .orbit-ring,
       .sec-head::before,
-      .bento-hero::after {
+      .bento-hero::after,
+      .triad-dot,
+      .tri-divider {
         animation: none !important
       }
     }
@@ -524,89 +510,49 @@
       height: 17px;
     }
 
-    .palette-wrap {
-      position: relative;
-    }
-
-    .palette-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      cursor: pointer;
+    .triad-mark {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: border-color 0.2s, transform 0.2s;
+      gap: 4px;
+      padding: 0 2px;
     }
 
-    .palette-btn:hover {
-      border-color: var(--border-mid);
-      transform: scale(1.06);
-    }
-
-    .palette-btn .swatch-dot {
-      width: 16px;
-      height: 16px;
+    .triad-dot {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: conic-gradient(from 180deg, #8b3fd1, #d1453f, #3f7dd1, #8b3fd1);
+      display: block;
+      animation: triadPulse 2.4s ease-in-out infinite;
     }
 
-    .palette-pop {
-      position: absolute;
-      top: calc(100% + 0.6rem);
-      right: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      border-radius: 16px;
-      padding: 0.6rem;
-      display: flex;
-      gap: 0.5rem;
-      opacity: 0;
-      transform: translateY(-6px) scale(0.96);
-      pointer-events: none;
-      transition: opacity 0.18s ease, transform 0.18s ease;
-      z-index: 600;
+    .triad-dot:nth-child(2) {
+      animation-delay: 0.2s;
     }
 
-    .palette-pop.open {
-      opacity: 1;
-      transform: none;
-      pointer-events: auto;
+    .triad-dot:nth-child(3) {
+      animation-delay: 0.4s;
     }
 
-    .accent-swatch {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      cursor: pointer;
-      padding: 0;
-      transition: transform 0.15s;
+    @keyframes triadPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: scale(1.4);
+        opacity: 1;
+      }
     }
 
-    .accent-swatch:hover {
-      transform: scale(1.12);
+    @media(max-width:480px) {
+      .triad-mark {
+        display: none;
+      }
     }
 
-    .accent-swatch.active {
-      border-color: var(--text);
-    }
-
-    .accent-swatch[data-accent="purple"] {
-      background: #8b3fd1;
-    }
-
-    .accent-swatch[data-accent="red"] {
-      background: #d1453f;
-    }
-
-    .accent-swatch[data-accent="blue"] {
-      background: #3f7dd1;
-    }
 
     .nav-cta {
       display: inline-flex;
@@ -665,31 +611,6 @@
       color: var(--text)
     }
 
-    .mob-menu-accents {
-      display: none;
-      align-items: center;
-      gap: 0.6rem;
-      padding-top: 0.3rem;
-      border-top: 1px solid var(--border);
-      margin-top: 0.2rem;
-    }
-
-    .mob-menu-accents span {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-right: 0.2rem;
-    }
-
-    @media(max-width:480px) {
-      .palette-wrap {
-        display: none;
-      }
-
-      .mob-menu-accents {
-        display: flex;
-      }
-    }
 
     @media(max-width:860px) {
       .nav-links {
@@ -832,7 +753,7 @@
       border-radius: inherit;
       padding: 3px;
       background: conic-gradient(from var(--border-angle, 0deg),
-          var(--rot-1), var(--rot-4), var(--accent), var(--rot-3), var(--rot-2), var(--rot-1));
+          var(--triad-purple), var(--triad-red), var(--triad-blue), var(--triad-purple));
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -1145,6 +1066,29 @@
       font-weight: 600;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+    }
+
+    .tri-divider {
+      display: block;
+      width: 52px;
+      height: 4px;
+      margin: 0.7rem auto 0;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--triad-purple), var(--triad-red), var(--triad-blue));
+      background-size: 200% 100%;
+      animation: triDividerFlow 4s ease-in-out infinite;
+    }
+
+    @keyframes triDividerFlow {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
     }
 
     .sec-sub {
@@ -1823,16 +1767,11 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
         </button>
-        <div class="palette-wrap">
-          <button class="palette-btn" id="palette-btn" aria-label="Choose accent color">
-            <span class="swatch-dot"></span>
-          </button>
-          <div class="palette-pop" id="palette-pop">
-            <button class="accent-swatch" data-accent="purple" aria-label="Purple accent"></button>
-            <button class="accent-swatch" data-accent="red" aria-label="Red accent"></button>
-            <button class="accent-swatch" data-accent="blue" aria-label="Blue accent"></button>
-          </div>
-        </div>
+        <span class="triad-mark" aria-hidden="true">
+          <span class="triad-dot" style="background:var(--triad-purple)"></span>
+          <span class="triad-dot" style="background:var(--triad-red)"></span>
+          <span class="triad-dot" style="background:var(--triad-blue)"></span>
+        </span>
         <button class="nav-cta" onclick="openSection('contact')">Let's talk</button>
         <button class="mob-btn" id="mob-btn" aria-label="Menu">
           <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -1847,12 +1786,6 @@
       <a onclick="openSection('credentials')">Credentials</a>
       <a onclick="openSection('contact')">Contact</a>
       <a onclick="openSection('gallery')">Gallery</a>
-      <div class="mob-menu-accents">
-        <span>Accent</span>
-        <button class="accent-swatch" data-accent="purple" aria-label="Purple accent"></button>
-        <button class="accent-swatch" data-accent="red" aria-label="Red accent"></button>
-        <button class="accent-swatch" data-accent="blue" aria-label="Blue accent"></button>
-      </div>
     </div>
   </nav>
 
@@ -2034,6 +1967,7 @@
       <div class="sec-head" style="--item-accent:var(--rot-1)">
         <h2 class="sec-title rv">Extracurricular <em>Impact</em></h2>
         <span class="sec-label rv d1">WHERE I'VE APPLIED MYSELF</span>
+        <span class="tri-divider" aria-hidden="true"></span>
         <p class="sec-sub rv d2">Where I apply leadership and technical skills in the real world.</p>
       </div>
 
@@ -2164,6 +2098,7 @@
       <div class="sec-head" style="--item-accent:var(--rot-3)">
         <h2 class="sec-title rv">Learning &amp; <em>Certifications</em></h2>
         <span class="sec-label rv d1">THINGS I'VE COMPLETED</span>
+        <span class="tri-divider" aria-hidden="true"></span>
         <p class="sec-sub rv d2">Professional courses and certifications that validate my technical expertise.</p>
       </div>
 
@@ -2213,6 +2148,7 @@
       <div class="sec-head" style="--item-accent:var(--rot-2)">
         <h2 class="sec-title rv">Get <em>In Touch</em></h2>
         <span class="sec-label rv d1">LET'S CONNECT</span>
+        <span class="tri-divider" aria-hidden="true"></span>
         <p class="sec-sub rv d2">Focused on studies and projects — open to relevant collaboration and networking.</p>
       </div>
 
@@ -2245,6 +2181,7 @@
       <div class="sec-head" style="--item-accent:var(--rot-4)">
         <h2 class="sec-title rv">Behind the <em>Lens</em></h2>
         <span class="sec-label rv d1">SNAPSHOTS</span>
+        <span class="tri-divider" aria-hidden="true"></span>
         <p class="sec-sub rv d2">Photos from film sets, projects, and everyday moments.</p>
       </div>
 
@@ -2314,31 +2251,6 @@
     applyTheme(savedTheme || 'light');
     themeBtn.addEventListener('click', () => {
       applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
-    });
-
-    /* ── ACCENT COLOR PICKER ── */
-    const paletteBtn = document.getElementById('palette-btn');
-    const palettePop = document.getElementById('palette-pop');
-    const accentSwatches = [...document.querySelectorAll('.accent-swatch')];
-    function applyAccent(accent) {
-      if (accent === 'purple') root.removeAttribute('data-accent');
-      else root.setAttribute('data-accent', accent);
-      accentSwatches.forEach(s => s.classList.toggle('active', s.dataset.accent === accent));
-      localStorage.setItem('accent', accent);
-    }
-    applyAccent(localStorage.getItem('accent') || 'purple');
-    paletteBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      palettePop.classList.toggle('open');
-    });
-    accentSwatches.forEach(s => {
-      s.addEventListener('click', () => {
-        applyAccent(s.dataset.accent);
-        palettePop.classList.remove('open');
-      });
-    });
-    document.addEventListener('click', e => {
-      if (!palettePop.contains(e.target) && e.target !== paletteBtn) palettePop.classList.remove('open');
     });
 
     /* ── SPARSE DECORATIVE DOTS — visibly drifting, each on its own rhythm ── */

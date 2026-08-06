@@ -862,6 +862,18 @@
       border-top: 4px solid var(--rot-4);
     }
 
+    .bento-projects {
+      grid-column: span 1;
+      grid-row: span 1;
+      border-top: 4px solid var(--rot-5);
+    }
+
+    .bento-writing {
+      grid-column: span 1;
+      grid-row: span 1;
+      border-top: 4px solid var(--triad-red);
+    }
+
     .bento-icon {
       width: 40px;
       height: 40px;
@@ -953,7 +965,9 @@
       }
 
       .bento-credentials,
-      .bento-contact {
+      .bento-contact,
+      .bento-projects,
+      .bento-writing {
         grid-column: span 1;
       }
     }
@@ -967,7 +981,9 @@
       .bento-activities,
       .bento-gallery,
       .bento-credentials,
-      .bento-contact {
+      .bento-contact,
+      .bento-projects,
+      .bento-writing {
         grid-column: span 1;
         grid-row: auto;
         min-height: 150px;
@@ -1916,6 +1932,29 @@
         <p>LinkedIn, GitHub, Instagram &amp; email — let's connect.</p>
         <span class="bento-open">Open →</span>
       </button>
+
+      <button class="bento-card bento-projects" onclick="openSection('projects')">
+        <div class="bento-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
+          </svg>
+        </div>
+        <h3>Projects</h3>
+        <p>Things I've built — from club software to AI-assisted platforms.</p>
+        <span class="bento-open">Open →</span>
+      </button>
+
+      <button class="bento-card bento-writing" onclick="openSection('writing')">
+        <div class="bento-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+          </svg>
+        </div>
+        <h3>Words</h3>
+        <p>Essays, scripts, and other writing — on and off screen.</p>
+        <span class="bento-open">Open →</span>
+      </button>
     </div>
   </div>
 
@@ -2239,6 +2278,72 @@
       </div>
     </div>
 
+    <!-- ── PROJECTS ── -->
+    <div class="sec" id="view-projects">
+      <div class="sec-head" style="--item-accent:var(--rot-5)">
+        <h2 class="sec-title rv">Things I've <em>Built</em></h2>
+        <span class="sec-label rv d1">SELECTED PROJECTS</span>
+        <span class="tri-divider" aria-hidden="true"></span>
+        <p class="sec-sub rv d2">Full-stack products and tools built end to end, from idea to deployment.</p>
+      </div>
+
+      <div class="proj-list">
+
+        <div class="proj-card rv d1" style="--item-accent:var(--rot-1)">
+          <h3>DataDairies</h3>
+          <p class="proj-cat">Full-Stack Product · Firebase &amp; AI</p>
+          <p class="proj-status">Live</p>
+          <div><span class="proj-pill">Firebase, Vercel, AI</span></div>
+          <p class="desc">A full-stack <strong>quiz platform</strong> built from scratch — real-time data and auth via
+            <strong>Firebase</strong>, a <strong>live analytics engine</strong> with real-time dashboards, and an
+            <strong>AI-assisted content generation</strong> pipeline that turns documents into quizzes.</p>
+        </div>
+
+        <div class="proj-card rv d2" style="--item-accent:var(--rot-3)">
+          <h3>Knot</h3>
+          <p class="proj-cat">Full-Stack Web Application · Built for ThinkNeuro</p>
+          <p class="proj-status">Live</p>
+          <div><span class="proj-pill">Full-Stack, Membership Tools</span></div>
+          <p class="desc">A <strong>full-stack web application</strong> designed to streamline school club
+            memberships and management, with features for <strong>student sign-ups</strong> and tracking
+            <strong>member engagement</strong>.</p>
+        </div>
+
+        <div class="proj-card rv d3" style="--item-accent:var(--rot-4)">
+          <h3>STEM Compass</h3>
+          <p class="proj-cat">Qatar's First Student-Led STEM Magazine</p>
+          <p class="proj-status">Active</p>
+          <div><span class="proj-pill">Publishing, Leadership</span></div>
+          <p class="desc">Founded and lead <strong>STEM Compass</strong>, publishing content that educates aspiring
+            professionals on <strong>career paths</strong> across STEM-related fields.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── WORDS ── -->
+    <div class="sec" id="view-writing">
+      <div class="sec-head" style="--item-accent:var(--triad-red)">
+        <h2 class="sec-title rv">A Few <em>Words</em></h2>
+        <span class="sec-label rv d1">ESSAYS &amp; SCRIPTS</span>
+        <span class="tri-divider" aria-hidden="true"></span>
+        <p class="sec-sub rv d2">Writing — on and off screen. This page is being put together.</p>
+      </div>
+
+      <div class="about-card rv">
+        <div class="icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+          </svg>
+        </div>
+        <div>
+          <h3>Coming soon</h3>
+          <p>This section is being written — pieces will be added here shortly.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- ── FOOTER ── -->
     <footer>
       <div class="palette-strip" aria-hidden="true">
@@ -2338,7 +2443,7 @@
     }
 
     /* ── SECTION VIEW-SWITCHER: bento grid ⇄ detail view ── */
-    const SECTIONS = ['about', 'activities', 'credentials', 'contact', 'gallery'];
+    const SECTIONS = ['about', 'activities', 'credentials', 'contact', 'gallery', 'projects', 'writing'];
     const homeGrid = document.getElementById('home-grid');
     const detailView = document.getElementById('detail-view');
     const allSecs = [...document.querySelectorAll('#detail-view .sec')];

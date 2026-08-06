@@ -1365,23 +1365,29 @@
 
     .tl-item {
       position: relative;
-      padding-bottom: 3rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 1.6rem 1.8rem 1.8rem;
+      margin-bottom: 1.7rem;
     }
 
     .tl-item:last-child {
-      padding-bottom: 0;
+      margin-bottom: 0;
     }
 
     .tl-item::before {
       content: '';
       position: absolute;
       left: -2.6rem;
-      top: 6px;
+      top: 1.9rem;
       width: 14px;
       height: 14px;
       border-radius: 50%;
       background: var(--bg);
       border: 2px solid var(--accent);
+      z-index: 1;
     }
 
     .tl-head {

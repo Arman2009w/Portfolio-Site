@@ -115,6 +115,17 @@
       transition: background 0.3s ease, color 0.3s ease;
     }
 
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, var(--border-mid) 1.2px, transparent 1.4px);
+      background-size: 32px 32px;
+      opacity: 0.6;
+    }
+
     /* ════════════════════════════
    AMBIENT DECORATION — sparse, minimal
 ════════════════════════════ */
@@ -263,7 +274,8 @@
       .bento-card,
       .float-badge,
       .orbit-ring,
-      .sec-head::before {
+      .sec-head::before,
+      .bento-hero::after {
         animation: none !important
       }
     }
@@ -800,11 +812,38 @@
       }
     }
 
+    @property --border-angle {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0deg;
+    }
+
     .bento-hero {
       grid-column: span 2;
       grid-row: span 2;
       justify-content: space-between;
-      border-top: 4px solid var(--accent);
+      border-color: transparent;
+    }
+
+    .bento-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 3px;
+      background: conic-gradient(from var(--border-angle, 0deg),
+          var(--rot-1), var(--rot-4), var(--accent), var(--rot-3), var(--rot-2), var(--rot-1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      animation: borderSpin 6s linear infinite;
+    }
+
+    @keyframes borderSpin {
+      to {
+        --border-angle: 360deg;
+      }
     }
 
     .bento-name {
@@ -2321,6 +2360,10 @@
       { top: '46%', left: '80%' }, { top: '58%', left: '4%' },
       { top: '2%', left: '52%' }, { top: '98%', left: '48%' },
       { top: '38%', left: '58%' }, { top: '64%', left: '46%' },
+      { top: '12%', left: '12%' }, { top: '88%', left: '82%' },
+      { top: '24%', left: '68%' }, { top: '70%', left: '58%' },
+      { top: '44%', left: '94%' }, { top: '54%', left: '2%' },
+      { top: '90%', left: '30%' }, { top: '3%', left: '40%' },
     ];
     const dotColors = ['var(--accent)', 'var(--rot-1)', 'var(--rot-2)', 'var(--rot-3)', 'var(--rot-4)'];
     const dotShapes = ['', '', 'shape-circle', 'shape-circle', 'shape-ring', 'shape-plus'];

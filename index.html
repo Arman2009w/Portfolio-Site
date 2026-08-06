@@ -863,14 +863,14 @@
     }
 
     .bento-projects {
-      grid-column: span 1;
-      grid-row: span 1;
+      grid-column: span 2;
+      grid-row: span 2;
       border-top: 4px solid var(--rot-5);
     }
 
     .bento-writing {
-      grid-column: span 1;
-      grid-row: span 1;
+      grid-column: span 2;
+      grid-row: span 2;
       border-top: 4px solid var(--triad-red);
     }
 
@@ -964,10 +964,14 @@
         grid-column: span 2;
       }
 
-      .bento-credentials,
-      .bento-contact,
       .bento-projects,
       .bento-writing {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+
+      .bento-credentials,
+      .bento-contact {
         grid-column: span 1;
       }
     }

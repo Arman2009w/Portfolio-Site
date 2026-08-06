@@ -127,6 +127,7 @@
       height: var(--sz, 5px);
       background: var(--dot-color, var(--accent));
       border-radius: 1px;
+      box-shadow: 0 0 6px 1px var(--dot-color, var(--accent));
       animation: dotDrift linear infinite;
       will-change: transform;
     }
@@ -137,7 +138,7 @@
 
     .dot-sq.shape-ring {
       background: transparent;
-      border: 2px solid var(--dot-color, var(--accent));
+      border: 2.5px solid var(--dot-color, var(--accent));
       border-radius: 50%;
     }
 
@@ -184,7 +185,7 @@
     @keyframes dotDrift {
       0% {
         transform: translate(var(--px, 0px), var(--py, 0px)) translate(0, 0);
-        opacity: 0.75;
+        opacity: 0.92;
       }
 
       50% {
@@ -194,7 +195,7 @@
 
       100% {
         transform: translate(var(--px, 0px), var(--py, 0px)) translate(0, 0);
-        opacity: 0.75;
+        opacity: 0.92;
       }
     }
 
@@ -2290,7 +2291,7 @@
       const dy = (Math.random() * 50 - 25).toFixed(0) + 'px';
       const dur = (Math.random() * 4 + 5).toFixed(1) + 's';
       const delay = (Math.random() * -8).toFixed(1) + 's';
-      const sz = (Math.random() * 6 + 5).toFixed(1) + 'px';
+      const sz = (Math.random() * 7 + 8).toFixed(1) + 'px';
       const depth = (Math.random() * 0.05 + 0.015);
       d.style.cssText += `--dx:${dx};--dy:${dy};--sz:${sz};--dot-color:${dotColors[i % dotColors.length]};animation-duration:${dur};animation-delay:${delay};`;
       d.dataset.depth = depth.toFixed(3);

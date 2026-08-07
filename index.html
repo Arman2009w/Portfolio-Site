@@ -1623,6 +1623,30 @@
       }
     }
 
+    .proj-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 9999px;
+      background: var(--item-accent, var(--accent));
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+
+    .proj-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(31, 49, 66, 0.22);
+    }
+
+    .proj-link svg {
+      flex-shrink: 0;
+    }
+
     /* ════════════════════════════
    CONTACT
 ════════════════════════════ */
@@ -2341,6 +2365,12 @@
             <div class="proj-shot"><img src="DataDairies-Screenshot-1.png" alt="DataDairies quiz browsing page"></div>
             <div class="proj-shot"><img src="DataDairies-Screenshot-2.png" alt="DataDairies landing page"></div>
           </div>
+          <a href="https://data-diaries.vercel.app/" target="_blank" rel="noopener" class="proj-link">
+            View Site
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10" />
+            </svg>
+          </a>
         </div>
 
         <div class="proj-card rv d2" style="--item-accent:var(--rot-3)">

@@ -1588,6 +1588,41 @@
       margin-top: 1rem;
     }
 
+    .proj-shots {
+      display: flex;
+      gap: 0.9rem;
+      margin-top: 1.3rem;
+    }
+
+    .proj-shot {
+      flex: 1;
+      min-width: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      aspect-ratio: 16/10;
+      transition: transform 0.3s var(--ease);
+    }
+
+    .proj-shot:hover {
+      transform: translateY(-3px);
+    }
+
+    .proj-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    @media(max-width:520px) {
+      .proj-shots {
+        flex-direction: column;
+      }
+    }
+
     /* ════════════════════════════
    CONTACT
 ════════════════════════════ */
@@ -2302,6 +2337,10 @@
           <p class="desc">A full-stack <strong>quiz platform</strong> built from scratch — real-time data and auth via
             <strong>Firebase</strong>, a <strong>live analytics engine</strong> with real-time dashboards, and an
             <strong>AI-assisted content generation</strong> pipeline that turns documents into quizzes.</p>
+          <div class="proj-shots">
+            <div class="proj-shot"><img src="DataDairies-Screenshot-1.png" alt="DataDairies quiz browsing page"></div>
+            <div class="proj-shot"><img src="DataDairies-Screenshot-2.png" alt="DataDairies landing page"></div>
+          </div>
         </div>
 
         <div class="proj-card rv d2" style="--item-accent:var(--rot-3)">

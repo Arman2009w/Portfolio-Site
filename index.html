@@ -1542,20 +1542,62 @@
       transform: translateY(-4px);
     }
 
-    /* ── PROJECTS: slide in from the side as each card scrolls into view ── */
-    .proj-slide {
-      transform: translateX(var(--slide-x, -70px)) scale(0.94);
-      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    /* ── PROJECTS: side-by-side carousel, click or scroll to focus ── */
+    .proj-carousel-wrap {
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
     }
 
-    .proj-slide.in {
-      transform: none;
+    .proj-carousel {
+      display: flex;
+      align-items: stretch;
+      gap: 1.6rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 1rem max(1.5rem, calc(50vw - 250px)) 2.5rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
 
-    @media(prefers-reduced-motion: reduce) {
-      .proj-slide {
-        transform: none;
-      }
+    .proj-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .proj-carousel .proj-card {
+      flex: 0 0 auto;
+      width: min(500px, 80vw);
+      scroll-snap-align: center;
+      cursor: pointer;
+      transform: scale(0.86);
+      opacity: 0.55;
+      transition: transform 0.35s var(--ease), opacity 0.35s var(--ease), box-shadow 0.35s var(--ease);
+      will-change: transform;
+    }
+
+    .proj-carousel .proj-card:hover {
+      transform: scale(0.89);
+    }
+
+    .proj-carousel .proj-card.is-center {
+      cursor: default;
+      opacity: 1;
+      box-shadow: 0 20px 46px rgba(31, 49, 66, 0.18);
+    }
+
+    .proj-carousel .proj-card.is-center:hover {
+      transform: scale(1);
+    }
+
+    .proj-hint {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: -1.2rem;
     }
 
     .proj-card h3 {
@@ -2369,48 +2411,51 @@
         <p class="sec-sub rv d2">Full-stack products and tools built end to end, from idea to deployment.</p>
       </div>
 
-      <div class="proj-list">
+      <div class="proj-carousel-wrap rv">
+        <div class="proj-carousel" id="projCarousel">
 
-        <div class="proj-card proj-slide rv" style="--item-accent:var(--rot-1); --slide-x:-70px">
-          <h3>DataDairies</h3>
-          <p class="proj-cat">Full-Stack Product · Firebase &amp; AI</p>
-          <p class="proj-status">Live</p>
-          <div><span class="proj-pill">Firebase, Vercel, AI</span></div>
-          <p class="desc">A full-stack <strong>quiz platform</strong> built from scratch — real-time data and auth via
-            <strong>Firebase</strong>, a <strong>live analytics engine</strong> with real-time dashboards, and an
-            <strong>AI-assisted content generation</strong> pipeline that turns documents into quizzes.</p>
-          <div class="proj-shots">
-            <div class="proj-shot"><img src="DataDairies-Screenshot-1.png" alt="DataDairies quiz browsing page"></div>
-            <div class="proj-shot"><img src="DataDairies-Screenshot-2.png" alt="DataDairies landing page"></div>
+          <div class="proj-card" style="--item-accent:var(--rot-1)">
+            <h3>DataDairies</h3>
+            <p class="proj-cat">Full-Stack Product · Firebase &amp; AI</p>
+            <p class="proj-status">Live</p>
+            <div><span class="proj-pill">Firebase, Vercel, AI</span></div>
+            <p class="desc">A full-stack <strong>quiz platform</strong> built from scratch — real-time data and auth via
+              <strong>Firebase</strong>, a <strong>live analytics engine</strong> with real-time dashboards, and an
+              <strong>AI-assisted content generation</strong> pipeline that turns documents into quizzes.</p>
+            <div class="proj-shots">
+              <div class="proj-shot"><img src="DataDairies-Screenshot-1.png" alt="DataDairies quiz browsing page"></div>
+              <div class="proj-shot"><img src="DataDairies-Screenshot-2.png" alt="DataDairies landing page"></div>
+            </div>
+            <a href="https://data-diaries.vercel.app/" target="_blank" rel="noopener" class="proj-link">
+              View Site
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10" />
+              </svg>
+            </a>
           </div>
-          <a href="https://data-diaries.vercel.app/" target="_blank" rel="noopener" class="proj-link">
-            View Site
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10" />
-            </svg>
-          </a>
-        </div>
 
-        <div class="proj-card proj-slide rv" style="--item-accent:var(--rot-3); --slide-x:70px">
-          <h3>Knot</h3>
-          <p class="proj-cat">Full-Stack Web Application · Built for ThinkNeuro</p>
-          <p class="proj-status">Live</p>
-          <div><span class="proj-pill">Full-Stack, Membership Tools</span></div>
-          <p class="desc">A <strong>full-stack web application</strong> designed to streamline school club
-            memberships and management, with features for <strong>student sign-ups</strong> and tracking
-            <strong>member engagement</strong>.</p>
-        </div>
+          <div class="proj-card" style="--item-accent:var(--rot-3)">
+            <h3>Knot</h3>
+            <p class="proj-cat">Full-Stack Web Application · Built for ThinkNeuro</p>
+            <p class="proj-status">Live</p>
+            <div><span class="proj-pill">Full-Stack, Membership Tools</span></div>
+            <p class="desc">A <strong>full-stack web application</strong> designed to streamline school club
+              memberships and management, with features for <strong>student sign-ups</strong> and tracking
+              <strong>member engagement</strong>.</p>
+          </div>
 
-        <div class="proj-card proj-slide rv" style="--item-accent:var(--rot-4); --slide-x:-70px">
-          <h3>STEM Compass</h3>
-          <p class="proj-cat">Qatar's First Student-Led STEM Magazine</p>
-          <p class="proj-status">Active</p>
-          <div><span class="proj-pill">Publishing, Leadership</span></div>
-          <p class="desc">Founded and lead <strong>STEM Compass</strong>, publishing content that educates aspiring
-            professionals on <strong>career paths</strong> across STEM-related fields.</p>
-        </div>
+          <div class="proj-card" style="--item-accent:var(--rot-4)">
+            <h3>STEM Compass</h3>
+            <p class="proj-cat">Qatar's First Student-Led STEM Magazine</p>
+            <p class="proj-status">Active</p>
+            <div><span class="proj-pill">Publishing, Leadership</span></div>
+            <p class="desc">Founded and lead <strong>STEM Compass</strong>, publishing content that educates aspiring
+              professionals on <strong>career paths</strong> across STEM-related fields.</p>
+          </div>
 
+        </div>
       </div>
+      <p class="proj-hint">Click a card, or scroll, to bring it into focus.</p>
     </div>
 
     <!-- ── WORDS ── -->
@@ -2559,6 +2604,7 @@
         homeGrid.style.display = 'none';
         detailView.style.display = 'block';
         detailView.classList.add('is-open');
+        if (id === 'projects') requestAnimationFrame(updateProjCarousel);
       } else {
         homeGrid.classList.remove('is-open');
         homeGrid.classList.add('is-closing');
@@ -2566,6 +2612,7 @@
           homeGrid.style.display = 'none';
           detailView.style.display = 'block';
           requestAnimationFrame(() => detailView.classList.add('is-open'));
+          if (id === 'projects') requestAnimationFrame(updateProjCarousel);
         }, 320);
       }
       if (!opts.skipHash) location.hash = id;
@@ -2623,6 +2670,41 @@
       document.getElementById('mob-menu').classList.toggle('open');
     });
     function closeMob() { document.getElementById('mob-menu').classList.remove('open') }
+
+    /* ── PROJECTS: side-by-side carousel, click or scroll to focus ── */
+    const projCarousel = document.getElementById('projCarousel');
+    let projRaf = null;
+    function updateProjCarousel() {
+      projRaf = null;
+      if (!projCarousel || projCarousel.offsetWidth === 0) return;
+      const cards = [...projCarousel.querySelectorAll('.proj-card')];
+      const wrapRect = projCarousel.getBoundingClientRect();
+      const centerX = wrapRect.left + wrapRect.width / 2;
+      cards.forEach(card => {
+        const r = card.getBoundingClientRect();
+        const cardCenter = r.left + r.width / 2;
+        const dist = Math.abs(centerX - cardCenter);
+        const t = Math.max(0, 1 - dist / (wrapRect.width / 2 + r.width / 2));
+        const scale = 0.86 + t * 0.14;
+        card.style.transform = `scale(${scale.toFixed(3)})`;
+        card.style.opacity = (0.55 + t * 0.45).toFixed(2);
+        card.classList.toggle('is-center', t > 0.75);
+      });
+    }
+    if (projCarousel) {
+      projCarousel.addEventListener('scroll', () => {
+        if (!projRaf) projRaf = requestAnimationFrame(updateProjCarousel);
+      }, { passive: true });
+      window.addEventListener('resize', () => {
+        if (!projRaf) projRaf = requestAnimationFrame(updateProjCarousel);
+      });
+      projCarousel.querySelectorAll('.proj-card').forEach(card => {
+        card.addEventListener('click', e => {
+          if (e.target.closest('.proj-link')) return;
+          card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        });
+      });
+    }
 
     /* ── SCROLL REVEAL ── */
     const obs = new IntersectionObserver(entries => {

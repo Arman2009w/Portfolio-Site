@@ -856,22 +856,10 @@
       border-top: 4px solid var(--rot-2);
     }
 
-    .bento-gallery {
-      grid-column: span 2;
-      grid-row: span 1;
-      border-top: 4px solid var(--rot-4);
-    }
-
     .bento-projects {
       grid-column: span 2;
       grid-row: span 1;
       border-top: 4px solid var(--rot-5);
-    }
-
-    .bento-writing {
-      grid-column: span 2;
-      grid-row: span 1;
-      border-top: 4px solid var(--triad-red);
     }
 
     .bento-icon {
@@ -956,23 +944,6 @@
       flex-shrink: 0;
     }
 
-    .bento-status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin: 1rem 0;
-      padding: 0.4rem 0.9rem;
-      border-radius: 9999px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      width: fit-content;
-    }
-
     .bento-icon-row {
       display: flex;
       gap: 0.5rem;
@@ -1022,13 +993,11 @@
         grid-row: span 1;
       }
 
-      .bento-activities,
-      .bento-gallery {
+      .bento-activities {
         grid-column: span 2;
       }
 
-      .bento-projects,
-      .bento-writing {
+      .bento-projects {
         grid-column: span 2;
         grid-row: span 1;
       }
@@ -1046,11 +1015,9 @@
 
       .bento-hero,
       .bento-activities,
-      .bento-gallery,
       .bento-credentials,
       .bento-contact,
-      .bento-projects,
-      .bento-writing {
+      .bento-projects {
         grid-column: span 1;
         grid-row: auto;
         min-height: 150px;
@@ -1847,84 +1814,6 @@
     }
 
     /* ════════════════════════════
-   GALLERY
-════════════════════════════ */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.1rem;
-    }
-
-    @media(max-width:720px) {
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr)
-      }
-    }
-
-    @media(max-width:440px) {
-      .gallery-grid {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .gal-item {
-      background: var(--surface);
-      height: 220px;
-      border-radius: 24px;
-      overflow: hidden;
-      position: relative;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      transition: transform 0.3s var(--ease), border-color 0.3s;
-    }
-
-    .gal-item:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-    }
-
-    .gal-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(10%) brightness(0.92);
-      transition: filter 0.5s ease, transform 0.5s ease;
-    }
-
-    .gal-item:hover img {
-      filter: grayscale(0%) brightness(1);
-      transform: scale(1.04)
-    }
-
-    .gal-item .img-ph {
-      width: 100%;
-      height: 100%
-    }
-
-    .gal-cap {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 0.85rem 1rem;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #fff;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.3s, transform 0.3s;
-      pointer-events: none;
-    }
-
-    .gal-item:hover .gal-cap {
-      opacity: 1;
-      transform: none
-    }
-
-    /* ════════════════════════════
    FOOTER
 ════════════════════════════ */
     footer {
@@ -1974,7 +1863,6 @@
         <li><a data-section="activities" onclick="openSection('activities')">Activities</a></li>
         <li><a data-section="credentials" onclick="openSection('credentials')">Credentials</a></li>
         <li><a data-section="contact" onclick="openSection('contact')">Contact</a></li>
-        <li><a data-section="gallery" onclick="openSection('gallery')">Gallery</a></li>
       </ul>
       <div class="nav-right">
         <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
@@ -2006,7 +1894,6 @@
       <a onclick="openSection('activities')">Activities</a>
       <a onclick="openSection('credentials')">Credentials</a>
       <a onclick="openSection('contact')">Contact</a>
-      <a onclick="openSection('gallery')">Gallery</a>
     </div>
   </nav>
 
@@ -2114,24 +2001,6 @@
         <span class="bento-open">Open →</span>
       </button>
 
-      <button class="bento-card bento-gallery" onclick="openSection('gallery')">
-        <svg class="bento-watermark" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-          <rect x="3" y="3" width="18" height="18" rx="3" />
-          <circle cx="8.5" cy="8.5" r="1.5" />
-          <path d="M21 15l-5-5L5 21" />
-        </svg>
-        <div class="bento-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <rect x="3" y="3" width="18" height="18" rx="3" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <path d="M21 15l-5-5L5 21" />
-          </svg>
-        </div>
-        <h3>Gallery</h3>
-        <p>Behind the lens — photos from film sets and everyday moments.</p>
-        <span class="bento-open">Open →</span>
-      </button>
-
       <button class="bento-card bento-contact" onclick="openSection('contact')">
         <svg class="bento-watermark" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
           <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.38 8.5 8.5 0 0 1-4-1L3 20l1.13-5.5A8.38 8.38 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z" />
@@ -2162,23 +2031,6 @@
           <span class="bento-chip"><span class="pip"></span>Knot</span>
           <span class="bento-chip"><span class="pip"></span>STEM Compass</span>
         </div>
-        <span class="bento-open">Open →</span>
-      </button>
-
-      <button class="bento-card bento-writing" onclick="openSection('writing')">
-        <svg class="bento-watermark" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-          <path d="M12 20h9" />
-          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-        </svg>
-        <div class="bento-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M12 20h9" />
-            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-          </svg>
-        </div>
-        <h3>Words</h3>
-        <p>Essays, scripts, and other writing — on and off screen.</p>
-        <span class="bento-status-pill"><span class="pip" style="width:6px;height:6px;border-radius:50%;background:var(--item-accent,var(--accent));"></span>In progress</span>
         <span class="bento-open">Open →</span>
       </button>
     </div>
@@ -2460,50 +2312,6 @@
       </div>
     </div>
 
-    <!-- ── GALLERY ── -->
-    <div class="sec" id="view-gallery">
-      <div class="sec-head" style="--item-accent:var(--rot-4)">
-        <h2 class="sec-title rv">Behind the <em>Lens</em></h2>
-        <span class="sec-label rv d1">SNAPSHOTS</span>
-        <span class="tri-divider" aria-hidden="true"></span>
-        <p class="sec-sub rv d2">Photos from film sets, projects, and everyday moments.</p>
-      </div>
-
-      <div class="gallery-grid rv">
-
-        <div class="gal-item">
-          <img src="Photo-2.jpg" alt="On Set"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>On Set</span></div>'">
-          <div class="gal-cap">On Set</div>
-        </div>
-
-        <div class="gal-item">
-          <img src="Photo-3.jpg" alt="Behind the Scenes"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Behind the Scenes</span></div>'">
-          <div class="gal-cap">Behind the Scenes</div>
-        </div>
-
-        <div class="gal-item">
-          <img src="Photo-4.jpg" alt="Candid Moment"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Candid Moment</span></div>'">
-          <div class="gal-cap">Candid Moment</div>
-        </div>
-
-        <div class="gal-item">
-          <img src="Photo-5.jpg" alt="With the Crew"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>With the Crew</span></div>'">
-          <div class="gal-cap">With the Crew</div>
-        </div>
-
-        <div class="gal-item">
-          <img src="Photo-6.jpg" alt="Portrait"
-            onerror="this.outerHTML='<div class=\'img-ph\' style=\'width:100%;height:220px\'><svg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>Portrait</span></div>'">
-          <div class="gal-cap">Portrait</div>
-        </div>
-
-      </div>
-    </div>
-
     <!-- ── PROJECTS ── -->
     <div class="sec" id="view-projects">
       <div class="sec-head" style="--item-accent:var(--rot-5)">
@@ -2558,29 +2366,6 @@
         </div>
       </div>
       <p class="proj-hint">Click a card, or scroll, to bring it into focus.</p>
-    </div>
-
-    <!-- ── WORDS ── -->
-    <div class="sec" id="view-writing">
-      <div class="sec-head" style="--item-accent:var(--triad-red)">
-        <h2 class="sec-title rv">A Few <em>Words</em></h2>
-        <span class="sec-label rv d1">ESSAYS &amp; SCRIPTS</span>
-        <span class="tri-divider" aria-hidden="true"></span>
-        <p class="sec-sub rv d2">Writing — on and off screen. This page is being put together.</p>
-      </div>
-
-      <div class="about-card rv">
-        <div class="icon-box">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M12 20h9" />
-            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-          </svg>
-        </div>
-        <div>
-          <h3>Coming soon</h3>
-          <p>This section is being written — pieces will be added here shortly.</p>
-        </div>
-      </div>
     </div>
 
     <!-- ── FOOTER ── -->
@@ -2682,7 +2467,7 @@
     }
 
     /* ── SECTION VIEW-SWITCHER: bento grid ⇄ detail view ── */
-    const SECTIONS = ['about', 'activities', 'credentials', 'contact', 'gallery', 'projects', 'writing'];
+    const SECTIONS = ['about', 'activities', 'credentials', 'contact', 'projects'];
     const homeGrid = document.getElementById('home-grid');
     const detailView = document.getElementById('detail-view');
     const allSecs = [...document.querySelectorAll('#detail-view .sec')];

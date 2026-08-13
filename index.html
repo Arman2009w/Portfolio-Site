@@ -98,6 +98,70 @@
       transition: background 0.3s ease, color 0.3s ease;
     }
 
+    /* ════════════════════════════
+   CUSTOM CURSOR — always contrasts with whatever is beneath it
+════════════════════════════ */
+    html.custom-cursor-active,
+    html.custom-cursor-active * {
+      cursor: none !important;
+    }
+
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      opacity: 0;
+    }
+
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      transition: opacity 0.25s ease, width 0.2s var(--ease), height 0.2s var(--ease);
+    }
+
+    .cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid #fff;
+      transition: opacity 0.25s ease, width 0.22s var(--ease), height 0.22s var(--ease), border-width 0.22s var(--ease);
+    }
+
+    .cursor-dot.is-visible,
+    .cursor-ring.is-visible {
+      opacity: 1;
+    }
+
+    .cursor-ring.is-hover {
+      width: 60px;
+      height: 60px;
+      border-width: 1px;
+    }
+
+    .cursor-dot.is-down {
+      width: 6px;
+      height: 6px;
+    }
+
+    .cursor-ring.is-down {
+      width: 30px;
+      height: 30px;
+    }
+
+    @media (hover: none), (pointer: coarse) {
+
+      .cursor-dot,
+      .cursor-ring {
+        display: none;
+      }
+    }
+
     body::before {
       content: '';
       position: fixed;
@@ -2598,6 +2662,74 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target) } });
     }, { threshold: 0.06 });
     document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+    /* ── CUSTOM CURSOR — dot + trailing ring, inverts against any background ── */
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.documentElement.classList.add('custom-cursor-active');
+
+      const cursorDot = document.createElement('div');
+      cursorDot.className = 'cursor-dot';
+      const cursorRing = document.createElement('div');
+      cursorRing.className = 'cursor-ring';
+      document.body.append(cursorDot, cursorRing);
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const ease = reduceMotion ? 1 : 0.18;
+      let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+      let ringX = mouseX, ringY = mouseY;
+      let started = false;
+
+      window.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+        if (!started) {
+          started = true;
+          ringX = mouseX;
+          ringY = mouseY;
+          cursorRing.style.left = ringX + 'px';
+          cursorRing.style.top = ringY + 'px';
+          cursorDot.classList.add('is-visible');
+          cursorRing.classList.add('is-visible');
+        }
+      }, { passive: true });
+
+      function trackRing() {
+        ringX += (mouseX - ringX) * ease;
+        ringY += (mouseY - ringY) * ease;
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+        requestAnimationFrame(trackRing);
+      }
+      trackRing();
+
+      const HOVER_SEL = 'a, button, input, textarea, select, label, .bento-card, .proj-card, .tl-item, .contact-tile, .accent-swatch, [onclick]';
+      document.addEventListener('mouseover', e => {
+        if (e.target.closest(HOVER_SEL)) cursorRing.classList.add('is-hover');
+      });
+      document.addEventListener('mouseout', e => {
+        if (e.target.closest(HOVER_SEL)) cursorRing.classList.remove('is-hover');
+      });
+      document.addEventListener('mousedown', () => {
+        cursorDot.classList.add('is-down');
+        cursorRing.classList.add('is-down');
+      });
+      document.addEventListener('mouseup', () => {
+        cursorDot.classList.remove('is-down');
+        cursorRing.classList.remove('is-down');
+      });
+      document.addEventListener('mouseleave', () => {
+        cursorDot.classList.remove('is-visible');
+        cursorRing.classList.remove('is-visible');
+      });
+      document.addEventListener('mouseenter', () => {
+        if (started) {
+          cursorDot.classList.add('is-visible');
+          cursorRing.classList.add('is-visible');
+        }
+      });
+    }
   </script>
 </body>
 

@@ -320,7 +320,6 @@
       .poly,
       .dot-sq,
       .bento-card,
-      .float-badge,
       .orbit-ring,
       .sec-head::before,
       .bento-hero::after,
@@ -331,61 +330,8 @@
     }
 
     /* ════════════════════════════
-   DECORATIVE ACCENTS — floating badges, glow blobs, flourishes
+   DECORATIVE ACCENTS — glow blobs, flourishes
 ════════════════════════════ */
-    .float-badge {
-      position: absolute;
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-top: 3px solid var(--item-accent, var(--accent));
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      z-index: 3;
-      pointer-events: none;
-      animation: badgeFloat 6s ease-in-out infinite;
-    }
-
-    .fb1 {
-      top: 9.4rem;
-      left: 3%;
-      animation-delay: 0s;
-    }
-
-    .fb2 {
-      top: 9.4rem;
-      right: 3%;
-      animation-delay: 1.3s;
-    }
-
-    .fb3 {
-      top: 5.3rem;
-      left: 47%;
-      animation-delay: 2.6s;
-    }
-
-    @keyframes badgeFloat {
-
-      0%,
-      100% {
-        transform: translateY(0) rotate(0deg);
-      }
-
-      50% {
-        transform: translateY(-9px) rotate(-4deg);
-      }
-    }
-
-    @media(max-width:860px) {
-      .float-badge {
-        display: none;
-      }
-    }
 
     .sec-head {
       position: relative;
@@ -840,11 +786,6 @@
       margin: 0.9rem 0 0.6rem;
     }
 
-    .bento-tagline {
-      font-size: 1.02rem;
-      color: var(--text-muted);
-    }
-
     .bento-hero-footer {
       display: flex;
       align-items: flex-end;
@@ -1006,23 +947,6 @@
       border-radius: 50%;
       background: var(--item-accent, var(--accent));
       flex-shrink: 0;
-    }
-
-    .bento-icon-row {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .bento-mini-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      background: var(--surface2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
     }
 
     .bento-thumbs {
@@ -1999,10 +1923,6 @@
       <line x1="300" y1="300" x2="100" y2="130" />
     </svg>
 
-    <div class="float-badge fb1" style="--item-accent:var(--rot-1)" aria-hidden="true">🎬</div>
-    <div class="float-badge fb2" style="--item-accent:var(--rot-3)" aria-hidden="true">♟</div>
-    <div class="float-badge fb3" style="--item-accent:var(--rot-4)" aria-hidden="true">✎</div>
-
     <div class="home-intro">
       <span class="home-eyebrow">Portfolio</span>
       <p class="home-sub">Tap a card to explore.</p>
@@ -2015,13 +1935,6 @@
         <div>
           <span class="home-eyebrow" style="margin-bottom:0">Hi, I'm</span>
           <h1 class="bento-name">Arman<br>Mohapatra</h1>
-          <p class="bento-tagline">Filmmaker · Developer · Writer · Chess Player</p>
-          <div class="bento-icon-row">
-            <div class="bento-mini-icon" title="Filmmaker">🎬</div>
-            <div class="bento-mini-icon" title="Developer">💻</div>
-            <div class="bento-mini-icon" title="Writer">✎</div>
-            <div class="bento-mini-icon" title="Chess Player">♟</div>
-          </div>
         </div>
         <div class="bento-hero-footer">
           <div class="hero-stats">
